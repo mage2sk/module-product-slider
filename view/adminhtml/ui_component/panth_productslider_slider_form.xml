@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">panth_productslider_slider_form.panth_productslider_slider_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Slider Information</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+
+    <settings>
+        <buttons>
+            <button name="back" class="Panth\ProductSlider\Block\Adminhtml\Slider\Edit\BackButton"/>
+            <button name="delete" class="Panth\ProductSlider\Block\Adminhtml\Slider\Edit\DeleteButton"/>
+            <button name="save" class="Panth\ProductSlider\Block\Adminhtml\Slider\Edit\SaveButton"/>
+            <button name="save_and_continue" class="Panth\ProductSlider\Block\Adminhtml\Slider\Edit\SaveAndContinueButton"/>
+        </buttons>
+        <namespace>panth_productslider_slider_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>panth_productslider_slider_form.panth_productslider_slider_form_data_source</dep>
+        </deps>
+    </settings>
+
+    <dataSource name="panth_productslider_slider_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="panth_productslider/slider/save"/>
+        </settings>
+        <dataProvider class="Panth\ProductSlider\Ui\DataProvider\SliderFormDataProvider" name="panth_productslider_slider_form_data_source">
+            <settings>
+                <requestFieldName>slider_id</requestFieldName>
+                <primaryFieldName>slider_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+
+    <!-- General Fieldset -->
+    <fieldset name="general" sortOrder="10">
+        <settings>
+            <collapsible>false</collapsible>
+            <opened>true</opened>
+            <label translate="true">General</label>
+        </settings>
+
+        <field name="slider_id" formElement="hidden">
+            <settings>
+                <dataType>text</dataType>
+            </settings>
+        </field>
+
+        <field name="title" formElement="input" sortOrder="10">
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Title</label>
+            </settings>
+        </field>
+
+        <field name="identifier" formElement="input" sortOrder="20">
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Identifier</label>
+                <notice translate="true">Unique identifier used for referencing the slider in widgets and layouts.</notice>
+            </settings>
+        </field>
+
+        <htmlContent name="usage_guide" sortOrder="25">
+            <block class="Panth\ProductSlider\Block\Adminhtml\Slider\Edit\UsageGuide" name="productslider_usage_guide"/>
+        </htmlContent>
+
+        <field name="is_active" formElement="checkbox" sortOrder="30">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Enable Slider</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+
+        <field name="sort_order" formElement="input" sortOrder="40">
+            <settings>
+                <validation>
+                    <rule name="validate-digits" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Sort Order</label>
+            </settings>
+        </field>
+
+        <field name="description" formElement="textarea" sortOrder="45">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Description</label>
+                <notice translate="true">HTML content displayed below the slider heading. Supports HTML tags for formatting.</notice>
+            </settings>
+        </field>
+    </fieldset>
+
+    <!-- Product Selection Fieldset -->
+    <fieldset name="product_selection" sortOrder="20">
+        <settings>
+            <collapsible>true</collapsible>
+            <opened>false</opened>
+            <label translate="true">Product Selection</label>
+        </settings>
+
+        <field name="product_ids" formElement="input" sortOrder="5">
+            <settings><dataType>text</dataType><visible>false</visible></settings>
+        </field>
+        <field name="category_ids" formElement="input" sortOrder="6">
+            <settings><dataType>text</dataType><visible>false</visible></settings>
+        </field>
+
+        <htmlContent name="product_category_chooser" sortOrder="10">
+            <block class="Panth\ProductSlider\Block\Adminhtml\Slider\Edit\AssignProducts" name="productslider_assign_products"/>
+        </htmlContent>
+
+        <field name="sale_products_only" formElement="checkbox" sortOrder="40">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Sale Products Only</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+
+        <field name="new_products_days" formElement="input" sortOrder="50">
+            <settings>
+                <validation>
+                    <rule name="validate-digits" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">New Products Days</label>
+                <notice translate="true">Number of days to consider a product as new. Leave empty to disable.</notice>
+            </settings>
+        </field>
+
+        <field name="price_from" formElement="input" sortOrder="60">
+            <settings>
+                <validation>
+                    <rule name="validate-number" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Price From</label>
+                <notice translate="true">Minimum product price filter.</notice>
+            </settings>
+        </field>
+
+        <field name="price_to" formElement="input" sortOrder="70">
+            <settings>
+                <validation>
+                    <rule name="validate-number" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Price To</label>
+                <notice translate="true">Maximum product price filter.</notice>
+            </settings>
+        </field>
+
+        <field name="exclude_out_of_stock" formElement="checkbox" sortOrder="80">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Exclude Out of Stock</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+    </fieldset>
+
+    <!-- Sorting Fieldset -->
+    <fieldset name="sorting" sortOrder="30">
+        <settings>
+            <collapsible>true</collapsible>
+            <opened>false</opened>
+            <label translate="true">Sorting</label>
+        </settings>
+
+        <field name="sort_by" formElement="select" sortOrder="10">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Sort By</label>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options>
+                            <option name="position" xsi:type="array">
+                                <item name="value" xsi:type="string">position</item>
+                                <item name="label" xsi:type="string" translate="true">Position</item>
+                            </option>
+                            <option name="name" xsi:type="array">
+                                <item name="value" xsi:type="string">name</item>
+                                <item name="label" xsi:type="string" translate="true">Name</item>
+                            </option>
+                            <option name="price" xsi:type="array">
+                                <item name="value" xsi:type="string">price</item>
+                                <item name="label" xsi:type="string" translate="true">Price</item>
+                            </option>
+                            <option name="created_at" xsi:type="array">
+                                <item name="value" xsi:type="string">created_at</item>
+                                <item name="label" xsi:type="string" translate="true">Created At</item>
+                            </option>
+                            <option name="random" xsi:type="array">
+                                <item name="value" xsi:type="string">random</item>
+                                <item name="label" xsi:type="string" translate="true">Random</item>
+                            </option>
+                        </options>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+        <field name="sort_direction" formElement="select" sortOrder="20">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Sort Direction</label>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options>
+                            <option name="asc" xsi:type="array">
+                                <item name="value" xsi:type="string">ASC</item>
+                                <item name="label" xsi:type="string" translate="true">Ascending</item>
+                            </option>
+                            <option name="desc" xsi:type="array">
+                                <item name="value" xsi:type="string">DESC</item>
+                                <item name="label" xsi:type="string" translate="true">Descending</item>
+                            </option>
+                        </options>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+        <field name="page_size" formElement="input" sortOrder="30">
+            <settings>
+                <validation>
+                    <rule name="validate-digits" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Page Size</label>
+                <notice translate="true">Number of products to display in the slider.</notice>
+            </settings>
+        </field>
+    </fieldset>
+
+    <!-- Layout Fieldset -->
+    <fieldset name="layout" sortOrder="40">
+        <settings>
+            <collapsible>true</collapsible>
+            <opened>false</opened>
+            <label translate="true">Layout</label>
+        </settings>
+
+        <field name="columns_mobile" formElement="input" sortOrder="10">
+            <settings>
+                <validation>
+                    <rule name="validate-digits" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Columns (Mobile)</label>
+                <notice translate="true">Number of visible product columns on mobile devices.</notice>
+            </settings>
+        </field>
+
+        <field name="columns_tablet" formElement="input" sortOrder="20">
+            <settings>
+                <validation>
+                    <rule name="validate-digits" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Columns (Tablet)</label>
+                <notice translate="true">Number of visible product columns on tablet devices.</notice>
+            </settings>
+        </field>
+
+        <field name="columns_desktop" formElement="input" sortOrder="30">
+            <settings>
+                <validation>
+                    <rule name="validate-digits" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Columns (Desktop)</label>
+                <notice translate="true">Number of visible product columns on desktop.</notice>
+            </settings>
+        </field>
+
+        <field name="show_pager" formElement="checkbox" sortOrder="40">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Show Pager</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+
+        <field name="show_add_to_cart" formElement="checkbox" sortOrder="50">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Show Add to Cart</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+
+        <field name="hide_details" formElement="checkbox" sortOrder="60">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Hide Details</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+
+        <field name="hide_rating" formElement="checkbox" sortOrder="70">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Hide Rating</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+    </fieldset>
+
+    <!-- Styling Fieldset -->
+    <fieldset name="styling" sortOrder="50">
+        <settings>
+            <collapsible>true</collapsible>
+            <opened>false</opened>
+            <label translate="true">Styling</label>
+        </settings>
+
+        <field name="style_preset" formElement="select" sortOrder="10">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Style Preset</label>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Panth\ProductSlider\Model\Config\Source\StylePreset"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+        <field name="card_shadow" formElement="select" sortOrder="20">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Card Shadow</label>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options>
+                            <option name="none" xsi:type="array">
+                                <item name="value" xsi:type="string">none</item>
+                                <item name="label" xsi:type="string" translate="true">None</item>
+                            </option>
+                            <option name="sm" xsi:type="array">
+                                <item name="value" xsi:type="string">sm</item>
+                                <item name="label" xsi:type="string" translate="true">Small</item>
+                            </option>
+                            <option name="md" xsi:type="array">
+                                <item name="value" xsi:type="string">md</item>
+                                <item name="label" xsi:type="string" translate="true">Medium</item>
+                            </option>
+                            <option name="lg" xsi:type="array">
+                                <item name="value" xsi:type="string">lg</item>
+                                <item name="label" xsi:type="string" translate="true">Large</item>
+                            </option>
+                        </options>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+        <field name="card_hover_effect" formElement="select" sortOrder="30">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Card Hover Effect</label>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options>
+                            <option name="none" xsi:type="array">
+                                <item name="value" xsi:type="string">none</item>
+                                <item name="label" xsi:type="string" translate="true">None</item>
+                            </option>
+                            <option name="lift" xsi:type="array">
+                                <item name="value" xsi:type="string">lift</item>
+                                <item name="label" xsi:type="string" translate="true">Lift</item>
+                            </option>
+                            <option name="grow" xsi:type="array">
+                                <item name="value" xsi:type="string">grow</item>
+                                <item name="label" xsi:type="string" translate="true">Grow</item>
+                            </option>
+                            <option name="glow" xsi:type="array">
+                                <item name="value" xsi:type="string">glow</item>
+                                <item name="label" xsi:type="string" translate="true">Glow</item>
+                            </option>
+                        </options>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+        <field name="custom_css_class" formElement="input" sortOrder="40">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Custom CSS Class</label>
+                <notice translate="true">Add custom CSS class(es) to the slider wrapper element.</notice>
+            </settings>
+        </field>
+    </fieldset>
+
+    <!-- Animation Fieldset -->
+    <fieldset name="animation" sortOrder="60">
+        <settings>
+            <collapsible>true</collapsible>
+            <opened>false</opened>
+            <label translate="true">Animation</label>
+        </settings>
+
+        <field name="enable_autoplay" formElement="checkbox" sortOrder="10">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Enable Autoplay</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+
+        <field name="autoplay_interval" formElement="input" sortOrder="20">
+            <settings>
+                <validation>
+                    <rule name="validate-digits" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Autoplay Interval (ms)</label>
+                <notice translate="true">Time between slides in milliseconds. Default: 5000.</notice>
+            </settings>
+        </field>
+    </fieldset>
+</form>

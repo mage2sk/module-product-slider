@@ -1,0 +1,374 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Panth ProductSlider Widget Configuration
+ *
+ * @package Panth_ProductSlider
+ * @author Panth
+ */
+-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="panth_product_slider" class="Panth\ProductSlider\Block\Widget\ProductSlider">
+        <label translate="true">Panth Product Slider (Advanced)</label>
+        <description translate="true">Advanced Product Slider with extensive customization options</description>
+        <parameters>
+            <!-- ==================== GENERAL SETTINGS ==================== -->
+            <parameter name="title" xsi:type="text" required="false" visible="true">
+                <label translate="true">Slider Title</label>
+                <description translate="true">Title displayed above the slider</description>
+            </parameter>
+
+            <parameter name="heading_tag" xsi:type="select" required="false" visible="true">
+                <label translate="true">Heading Tag</label>
+                <description translate="true">HTML tag for the title (h1, h2, h3, etc.)</description>
+                <options>
+                    <option name="h1" value="h1">
+                        <label translate="true">H1</label>
+                    </option>
+                    <option name="h2" value="h2" selected="true">
+                        <label translate="true">H2</label>
+                    </option>
+                    <option name="h3" value="h3">
+                        <label translate="true">H3</label>
+                    </option>
+                    <option name="h4" value="h4">
+                        <label translate="true">H4</label>
+                    </option>
+                    <option name="h5" value="h5">
+                        <label translate="true">H5</label>
+                    </option>
+                    <option name="h6" value="h6">
+                        <label translate="true">H6</label>
+                    </option>
+                </options>
+            </parameter>
+
+            <parameter name="show_heading" xsi:type="select" required="false" visible="true">
+                <label translate="true">Show Heading</label>
+                <options>
+                    <option name="yes" value="1" selected="true">
+                        <label translate="true">Yes</label>
+                    </option>
+                    <option name="no" value="0">
+                        <label translate="true">No</label>
+                    </option>
+                </options>
+            </parameter>
+
+            <!-- ==================== PRODUCT SELECTION ==================== -->
+            <parameter name="category_ids" xsi:type="text" required="false" visible="true">
+                <label translate="true">Category IDs</label>
+                <description translate="true">Comma-separated category IDs (e.g., 42,43,44)</description>
+            </parameter>
+
+            <parameter name="include_child_categories" xsi:type="select" required="false" visible="true">
+                <label translate="true">Include Child Categories</label>
+                <description translate="true">Include products from child categories</description>
+                <options>
+                    <option name="yes" value="1">
+                        <label translate="true">Yes</label>
+                    </option>
+                    <option name="no" value="0" selected="true">
+                        <label translate="true">No</label>
+                    </option>
+                </options>
+            </parameter>
+
+            <parameter name="product_ids" xsi:type="text" required="false" visible="true">
+                <label translate="true">Product IDs</label>
+                <description translate="true">Comma-separated product IDs (e.g., 1,2,3,4,5)</description>
+            </parameter>
+
+            <parameter name="product_skus" xsi:type="text" required="false" visible="true">
+                <label translate="true">Product SKUs</label>
+                <description translate="true">Comma-separated product SKUs (e.g., SKU001,SKU002)</description>
+            </parameter>
+
+            <parameter name="sale_products_only" xsi:type="select" required="false" visible="true">
+                <label translate="true">Sale Products Only</label>
+                <description translate="true">Show only products with special prices</description>
+                <options>
+                    <option name="yes" value="1">
+                        <label translate="true">Yes</label>
+                    </option>
+                    <option name="no" value="0" selected="true">
+                        <label translate="true">No</label>
+                    </option>
+                </options>
+            </parameter>
+
+            <parameter name="new_products_days" xsi:type="text" required="false" visible="true">
+                <label translate="true">New Products (Days)</label>
+                <description translate="true">Show products created within last X days (leave empty to disable)</description>
+            </parameter>
+
+            <parameter name="price_from" xsi:type="text" required="false" visible="true">
+                <label translate="true">Price From</label>
+                <description translate="true">Minimum price filter</description>
+            </parameter>
+
+            <parameter name="price_to" xsi:type="text" required="false" visible="true">
+                <label translate="true">Price To</label>
+                <description translate="true">Maximum price filter</description>
+            </parameter>
+
+            <parameter name="exclude_out_of_stock" xsi:type="select" required="false" visible="true">
+                <label translate="true">Exclude Out of Stock</label>
+                <options>
+                    <option name="yes" value="1">
+                        <label translate="true">Yes</label>
+                    </option>
+                    <option name="no" value="0" selected="true">
+                        <label translate="true">No</label>
+                    </option>
+                </options>
+            </parameter>
+
+            <!-- ==================== SORTING & LIMITING ==================== -->
+            <parameter name="sort_by" xsi:type="select" required="false" visible="true">
+                <label translate="true">Sort By</label>
+                <options>
+                    <option name="position" value="position" selected="true">
+                        <label translate="true">Position</label>
+                    </option>
+                    <option name="name" value="name">
+                        <label translate="true">Name</label>
+                    </option>
+                    <option name="price" value="price">
+                        <label translate="true">Price</label>
+                    </option>
+                    <option name="created_at" value="created_at">
+                        <label translate="true">Newest First</label>
+                    </option>
+                    <option name="random" value="random">
+                        <label translate="true">Random</label>
+                    </option>
+                </options>
+            </parameter>
+
+            <parameter name="sort_direction" xsi:type="select" required="false" visible="true">
+                <label translate="true">Sort Direction</label>
+                <options>
+                    <option name="asc" value="ASC" selected="true">
+                        <label translate="true">Ascending</label>
+                    </option>
+                    <option name="desc" value="DESC">
+                        <label translate="true">Descending</label>
+                    </option>
+                </options>
+            </parameter>
+
+            <parameter name="page_size" xsi:type="text" required="false" visible="true">
+                <label translate="true">Number of Products</label>
+                <description translate="true">Maximum number of products to display (default: 8)</description>
+                <value>8</value>
+            </parameter>
+
+            <!-- ==================== LAYOUT OPTIONS ==================== -->
+            <parameter name="columns_mobile" xsi:type="text" required="false" visible="true">
+                <label translate="true">Columns (Mobile)</label>
+                <description translate="true">Number of columns on mobile (default: 1)</description>
+                <value>1</value>
+            </parameter>
+
+            <parameter name="columns_tablet" xsi:type="text" required="false" visible="true">
+                <label translate="true">Columns (Tablet)</label>
+                <description translate="true">Number of columns on tablet (default: 2)</description>
+                <value>2</value>
+            </parameter>
+
+            <parameter name="columns_desktop" xsi:type="text" required="false" visible="true">
+                <label translate="true">Columns (Desktop)</label>
+                <description translate="true">Number of columns on desktop (default: 4)</description>
+                <value>4</value>
+            </parameter>
+
+            <parameter name="show_pager" xsi:type="select" required="false" visible="true">
+                <label translate="true">Show Pagination Dots</label>
+                <options>
+                    <option name="yes" value="1" selected="true">
+                        <label translate="true">Yes</label>
+                    </option>
+                    <option name="no" value="0">
+                        <label translate="true">No</label>
+                    </option>
+                </options>
+            </parameter>
+
+            <!-- ==================== BADGE SETTINGS ==================== -->
+            <parameter name="enable_badges" xsi:type="select" required="false" visible="true">
+                <label translate="true">Enable Badges</label>
+                <description translate="true">Enable sale/new/stock badges on products</description>
+                <options>
+                    <option name="yes" value="1" selected="true">
+                        <label translate="true">Yes</label>
+                    </option>
+                    <option name="no" value="0">
+                        <label translate="true">No</label>
+                    </option>
+                </options>
+            </parameter>
+
+            <parameter name="badge_types" xsi:type="text" required="false" visible="true">
+                <label translate="true">Badge Types</label>
+                <description translate="true">Comma-separated: sale,new,stock,featured (e.g., sale,new)</description>
+                <value>sale,new</value>
+            </parameter>
+
+            <parameter name="badge_position" xsi:type="select" required="false" visible="true">
+                <label translate="true">Badge Position</label>
+                <options>
+                    <option name="top-left" value="top-left" selected="true">
+                        <label translate="true">Top Left</label>
+                    </option>
+                    <option name="top-right" value="top-right">
+                        <label translate="true">Top Right</label>
+                    </option>
+                    <option name="bottom-left" value="bottom-left">
+                        <label translate="true">Bottom Left</label>
+                    </option>
+                    <option name="bottom-right" value="bottom-right">
+                        <label translate="true">Bottom Right</label>
+                    </option>
+                </options>
+            </parameter>
+
+            <!-- ==================== DISPLAY OPTIONS ==================== -->
+            <parameter name="hide_details" xsi:type="select" required="false" visible="true">
+                <label translate="true">Hide Product Details</label>
+                <options>
+                    <option name="yes" value="1">
+                        <label translate="true">Yes</label>
+                    </option>
+                    <option name="no" value="0" selected="true">
+                        <label translate="true">No</label>
+                    </option>
+                </options>
+            </parameter>
+
+            <parameter name="hide_rating" xsi:type="select" required="false" visible="true">
+                <label translate="true">Hide Rating</label>
+                <options>
+                    <option name="yes" value="1">
+                        <label translate="true">Yes</label>
+                    </option>
+                    <option name="no" value="0" selected="true">
+                        <label translate="true">No</label>
+                    </option>
+                </options>
+            </parameter>
+
+            <parameter name="show_add_to_cart" xsi:type="select" required="false" visible="true">
+                <label translate="true">Show Add to Cart Button</label>
+                <options>
+                    <option name="yes" value="1" selected="true">
+                        <label translate="true">Yes</label>
+                    </option>
+                    <option name="no" value="0">
+                        <label translate="true">No</label>
+                    </option>
+                </options>
+            </parameter>
+
+            <!-- ==================== STYLING OPTIONS ==================== -->
+            <parameter name="style_preset" xsi:type="select" required="false" visible="true">
+                <label translate="true">Style Preset</label>
+                <description translate="true">Pre-defined style configurations</description>
+                <options>
+                    <option name="default" value="default" selected="true">
+                        <label translate="true">Default (From Config)</label>
+                    </option>
+                    <option name="modern" value="modern">
+                        <label translate="true">Modern</label>
+                    </option>
+                    <option name="minimal" value="minimal">
+                        <label translate="true">Minimal</label>
+                    </option>
+                    <option name="bold" value="bold">
+                        <label translate="true">Bold</label>
+                    </option>
+                    <option name="custom" value="custom">
+                        <label translate="true">Custom (Use individual settings)</label>
+                    </option>
+                </options>
+            </parameter>
+
+            <parameter name="card_shadow" xsi:type="select" required="false" visible="true">
+                <label translate="true">Card Shadow</label>
+                <options>
+                    <option name="none" value="none">
+                        <label translate="true">None</label>
+                    </option>
+                    <option name="sm" value="sm">
+                        <label translate="true">Small</label>
+                    </option>
+                    <option name="md" value="md" selected="true">
+                        <label translate="true">Medium</label>
+                    </option>
+                    <option name="lg" value="lg">
+                        <label translate="true">Large</label>
+                    </option>
+                    <option name="xl" value="xl">
+                        <label translate="true">Extra Large</label>
+                    </option>
+                </options>
+            </parameter>
+
+            <parameter name="card_hover_effect" xsi:type="select" required="false" visible="true">
+                <label translate="true">Card Hover Effect</label>
+                <options>
+                    <option name="none" value="none">
+                        <label translate="true">None</label>
+                    </option>
+                    <option name="lift" value="lift" selected="true">
+                        <label translate="true">Lift (Shadow increase)</label>
+                    </option>
+                    <option name="scale" value="scale">
+                        <label translate="true">Scale (Slight zoom)</label>
+                    </option>
+                    <option name="both" value="both">
+                        <label translate="true">Lift + Scale</label>
+                    </option>
+                </options>
+            </parameter>
+
+            <!-- ==================== ANIMATION OPTIONS ==================== -->
+            <parameter name="enable_autoplay" xsi:type="select" required="false" visible="true">
+                <label translate="true">Enable Auto-Play</label>
+                <options>
+                    <option name="yes" value="1">
+                        <label translate="true">Yes</label>
+                    </option>
+                    <option name="no" value="0" selected="true">
+                        <label translate="true">No</label>
+                    </option>
+                </options>
+            </parameter>
+
+            <parameter name="autoplay_interval" xsi:type="text" required="false" visible="true">
+                <label translate="true">Auto-Play Interval (ms)</label>
+                <description translate="true">Milliseconds between slides (e.g., 3000 = 3 seconds). Only works if Auto-Play is enabled.</description>
+                <value>3000</value>
+            </parameter>
+
+            <!-- ==================== CUSTOM CSS ==================== -->
+            <parameter name="custom_css_class" xsi:type="text" required="false" visible="true">
+                <label translate="true">Custom CSS Class</label>
+                <description translate="true">Additional CSS classes for the slider container</description>
+            </parameter>
+        </parameters>
+    </widget>
+
+    <!-- Slider by Identifier (from CRUD admin) -->
+    <widget id="panth_product_slider_by_id" class="Panth\ProductSlider\Block\SliderById">
+        <label translate="true">Panth Product Slider (By Identifier)</label>
+        <description translate="true">Display a product slider created in Manage Sliders by its identifier</description>
+        <parameters>
+            <parameter name="identifier" xsi:type="text" required="true" visible="true">
+                <label translate="true">Slider Identifier</label>
+                <description translate="true">Enter the identifier of the slider created in Panth &gt; Product Slider &gt; Manage Sliders</description>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

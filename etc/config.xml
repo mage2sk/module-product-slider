@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Panth Infotech. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <product_slider>
+            <general>
+                <enabled>1</enabled>
+            </general>
+            <default_layout>
+                <columns_mobile>1</columns_mobile>
+                <columns_tablet>2</columns_tablet>
+                <columns_desktop>4</columns_desktop>
+                <page_size>8</page_size>
+            </default_layout>
+        </product_slider>
+    </default>
+</config>

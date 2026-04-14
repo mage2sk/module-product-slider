@@ -1,0 +1,48 @@
+{
+    "panth_product_slider": {
+        "column": {
+            "slider_id": true,
+            "identifier": true,
+            "title": true,
+            "is_active": true,
+            "store_ids": true,
+            "heading_tag": true,
+            "show_heading": true,
+            "description": true,
+            "category_ids": true,
+            "product_ids": true,
+            "product_skus": true,
+            "sale_products_only": true,
+            "new_products_days": true,
+            "price_from": true,
+            "price_to": true,
+            "exclude_out_of_stock": true,
+            "sort_by": true,
+            "sort_direction": true,
+            "page_size": true,
+            "columns_mobile": true,
+            "columns_tablet": true,
+            "columns_desktop": true,
+            "show_pager": true,
+            "enable_autoplay": true,
+            "autoplay_interval": true,
+            "show_add_to_cart": true,
+            "hide_details": true,
+            "hide_rating": true,
+            "style_preset": true,
+            "card_shadow": true,
+            "card_hover_effect": true,
+            "custom_css_class": true,
+            "sort_order": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "PANTH_PRODUCT_SLIDER_IDENTIFIER": true
+        },
+        "index": {
+            "PANTH_PRODUCT_SLIDER_IS_ACTIVE": true
+        }
+    }
+}

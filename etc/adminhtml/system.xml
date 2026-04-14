@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="panth" translate="label" sortOrder="400">
+            <label>🚀 Panth Extensions</label>
+        </tab>
+        <section id="product_slider" translate="label" type="text" sortOrder="400" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Product Slider</label>
+            <tab>panth</tab>
+            <resource>Panth_ProductSlider::config</resource>
+
+            <!-- General Settings -->
+            <group id="general" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Settings</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Module</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable or disable the Product Slider module globally. When disabled, no sliders will render on the frontend.</comment>
+                </field>
+            </group>
+
+            <!-- Default Layout -->
+            <group id="default_layout" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Default Layout</label>
+                <comment><![CDATA[Default values used when creating new sliders. Individual sliders can override these in their edit form.]]></comment>
+
+                <field id="columns_mobile" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Default Columns (Mobile)</label>
+                    <comment>Default: 1</comment>
+                    <validate>validate-digits</validate>
+                </field>
+
+                <field id="columns_tablet" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Default Columns (Tablet)</label>
+                    <comment>Default: 2</comment>
+                    <validate>validate-digits</validate>
+                </field>
+
+                <field id="columns_desktop" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Default Columns (Desktop)</label>
+                    <comment>Default: 4</comment>
+                    <validate>validate-digits</validate>
+                </field>
+
+                <field id="page_size" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Default Products Per Slider</label>
+                    <comment>Default: 8</comment>
+                    <validate>validate-digits</validate>
+                </field>
+            </group>
+
+            <!-- Design Note -->
+            <group id="design_note" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Design &amp; Colors</label>
+                <comment><![CDATA[
+                    Slider arrow colors and product card styling are managed through the theme configuration file.<br/><br/>
+                    <strong>File:</strong> <code>app/design/frontend/Panth/Infotech/web/tailwind/theme-config.json</code><br/>
+                    <strong>Section:</strong> <code>product-slider</code><br/><br/>
+                    Product badges are managed through the <strong>Smart Product Badges</strong> module.
+                ]]></comment>
+            </group>
+        </section>
+    </system>
+</config>

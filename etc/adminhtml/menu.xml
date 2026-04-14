@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Panth_ProductSlider::group"
+             title="Product Slider"
+             module="Panth_ProductSlider"
+             sortOrder="25"
+             parent="Panth_Core::panth_extensions"
+             resource="Panth_ProductSlider::config"/>
+        <add id="Panth_ProductSlider::slider_manage"
+             title="Manage Sliders"
+             module="Panth_ProductSlider"
+             sortOrder="5"
+             parent="Panth_ProductSlider::group"
+             action="panth_productslider/slider/index"
+             resource="Panth_ProductSlider::slider_manage"/>
+        <add id="Panth_ProductSlider::settings"
+             title="Configuration"
+             module="Panth_ProductSlider"
+             sortOrder="10"
+             parent="Panth_ProductSlider::group"
+             action="adminhtml/system_config/edit/section/product_slider"
+             resource="Panth_ProductSlider::config"/>
+    </menu>
+</config>

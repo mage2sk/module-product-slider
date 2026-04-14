@@ -1,0 +1,55 @@
+<?php
+/**
+ * Usage Guide — shows how to embed the slider
+ * @var \Panth\ProductSlider\Block\Adminhtml\Slider\Edit\UsageGuide $block
+ */
+$identifier = $block->getSliderIdentifier();
+$isNew = !$block->getSliderId();
+?>
+
+<div class="admin__field" style="margin-bottom: 15px;">
+    <div style="background: #f5f9fc; border: 1px solid #c5dde9; border-left: 4px solid #006bb4; border-radius: 3px; padding: 15px 18px;">
+        <strong style="display: block; font-size: 13px; color: #006bb4; margin-bottom: 10px;">
+            <?= $block->escapeHtml(__('How to Use This Slider')) ?>
+        </strong>
+
+        <?php if ($isNew): ?>
+            <p style="font-size: 12px; color: #666; margin: 0;">
+                <?= $block->escapeHtml(__('Save the slider first to see usage instructions with the actual identifier.')) ?>
+            </p>
+        <?php else: ?>
+            <table style="width: 100%; border-collapse: collapse;">
+                <tr>
+                    <td style="padding: 6px 0; vertical-align: top; width: 140px; font-size: 12px; font-weight: 600; color: #333;">
+                        <?= $block->escapeHtml(__('CMS Page/Block:')) ?>
+                    </td>
+                    <td style="padding: 6px 0;">
+                        <code style="background: #fff; border: 1px solid #d6d6d6; padding: 4px 8px; border-radius: 2px; font-size: 11px; display: inline-block; word-break: break-all; color: #333;">
+                            {{widget type="Panth\ProductSlider\Block\SliderById" identifier="<?= $block->escapeHtml($identifier) ?>"}}
+                        </code>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 6px 0; vertical-align: top; font-size: 12px; font-weight: 600; color: #333;">
+                        <?= $block->escapeHtml(__('Layout XML:')) ?>
+                    </td>
+                    <td style="padding: 6px 0;">
+                        <code style="background: #fff; border: 1px solid #d6d6d6; padding: 4px 8px; border-radius: 2px; font-size: 11px; display: inline-block; word-break: break-all; color: #333;">
+                            &lt;block class="Panth\ProductSlider\Block\SliderById"&gt;&lt;arguments&gt;&lt;argument name="identifier" xsi:type="string"&gt;<?= $block->escapeHtml($identifier) ?>&lt;/argument&gt;&lt;/arguments&gt;&lt;/block&gt;
+                        </code>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 6px 0; vertical-align: top; font-size: 12px; font-weight: 600; color: #333;">
+                        <?= $block->escapeHtml(__('PHTML Template:')) ?>
+                    </td>
+                    <td style="padding: 6px 0;">
+                        <code style="background: #fff; border: 1px solid #d6d6d6; padding: 4px 8px; border-radius: 2px; font-size: 11px; display: inline-block; word-break: break-all; color: #333;">
+                            &lt;?= $block-&gt;getLayout()-&gt;createBlock(\Panth\ProductSlider\Block\SliderById::class)-&gt;setData('identifier', '<?= $block->escapeHtml($identifier) ?>')->toHtml() ?&gt;
+                        </code>
+                    </td>
+                </tr>
+            </table>
+        <?php endif; ?>
+    </div>
+</div>

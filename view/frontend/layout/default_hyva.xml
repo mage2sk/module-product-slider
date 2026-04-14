@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Hyva: Remove Swiper.js (Hyva uses snap-slider, not Swiper)
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <remove src="Panth_Core::css/swiper-bundle.min.css"/>
+        <remove src="Panth_Core::js/swiper-bundle.min.js"/>
+    </head>
+</page>

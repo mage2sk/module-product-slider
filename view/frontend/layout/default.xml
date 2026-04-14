@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Load Swiper.js for Luma product slider
+ * Hyva uses snap-slider (no Swiper needed)
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <!-- Swiper CSS + JS for Luma product slider -->
+        <css src="Panth_Core::css/swiper-bundle.min.css"/>
+        <script src="Panth_Core::js/swiper-bundle.min.js"/>
+    </head>
+</page>
