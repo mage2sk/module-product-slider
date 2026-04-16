@@ -7,7 +7,7 @@
              module="Panth_ProductSlider"
              sortOrder="25"
              parent="Panth_Core::panth_extensions"
-             resource="Panth_ProductSlider::productslider"/>
+             resource="Panth_ProductSlider::slider_manage"/>
         <add id="Panth_ProductSlider::slider_manage"
              title="Manage Sliders"
              module="Panth_ProductSlider"
