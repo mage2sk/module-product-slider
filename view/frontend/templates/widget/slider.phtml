@@ -24,13 +24,22 @@ $lucideIcons = $viewModels->require(LucideIcons::class);
 $productListItemViewModel = $viewModels->require(ProductListItem::class);
 
 $config = $block->getSliderConfig();
-$products = $block->getProductCollection();
-$sliderId = $block->getSliderId();
-$trackClasses = $block->getColumnTrackClasses();
 
-if (!$products || $products->getSize() == 0) {
+// Collection is cached on the block, so this is the same instance _toHtml
+// already loaded — getItems() returns the cached array with no extra query.
+// The try/catch is defensive: if some downstream filter still produces
+// duplicate entity_id rows and the load throws, render empty instead of 500.
+try {
+    $products = $block->getProductCollection()->getItems();
+} catch (\Throwable) {
     return '';
 }
+if (empty($products)) {
+    return '';
+}
+
+$sliderId = $block->getSliderId();
+$trackClasses = $block->getColumnTrackClasses();
 
 $columnCount = (int) ($config['columns_desktop'] ?? 4);
 $showPager = $config['show_pager'] ?? true;

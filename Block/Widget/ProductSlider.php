@@ -74,6 +74,15 @@ class ProductSlider extends Template implements BlockInterface
     private ImageHelper $imageHelper;
 
     /**
+     * Cached product collection so getProductCollection() only builds the
+     * select + joins once per render (it is called from both _toHtml and
+     * the template).
+     *
+     * @var \Magento\Catalog\Model\ResourceModel\Product\Collection|null
+     */
+    private ?\Magento\Catalog\Model\ResourceModel\Product\Collection $productCollection = null;
+
+    /**
      * @param Context $context
      * @param CollectionFactory $productCollectionFactory
      * @param Visibility $catalogProductVisibility
@@ -145,6 +154,10 @@ class ProductSlider extends Template implements BlockInterface
      */
     public function getProductCollection()
     {
+        if ($this->productCollection !== null) {
+            return $this->productCollection;
+        }
+
         $collection = $this->productCollectionFactory->create();
         $collection->addAttributeToSelect([
                 'name',
@@ -210,15 +223,22 @@ class ProductSlider extends Template implements BlockInterface
             $collection->addAttributeToFilter('price', ['lteq' => $priceTo]);
         }
 
-        // Exclude out of stock
+        // Exclude out of stock — joinField uses an INNER JOIN on stock_status
+        // which duplicates entity_id rows when a product has multiple stock
+        // entries (multi-source / multi-website), tripping the collection's
+        // "Item with the same ID already exists" guard. Use joinLeft scoped
+        // to the default stock (website_id = 0) and force DISTINCT as belt
+        // and braces.
         if ($this->getExcludeOutOfStock()) {
-            $collection->joinField(
-                'stock_status',
-                'cataloginventory_stock_status',
-                'stock_status',
-                'product_id=entity_id',
-                ['stock_status' => \Magento\CatalogInventory\Model\Stock\Status::STATUS_IN_STOCK]
+            $collection->getSelect()->joinLeft(
+                ['_stock_status' => $collection->getTable('cataloginventory_stock_status')],
+                'e.entity_id = _stock_status.product_id AND _stock_status.website_id = 0',
+                []
+            )->where(
+                '_stock_status.stock_status = ?',
+                \Magento\CatalogInventory\Model\Stock\Status::STATUS_IN_STOCK
             );
+            $collection->getSelect()->distinct(true);
         }
 
         // Apply sorting
@@ -235,7 +255,7 @@ class ProductSlider extends Template implements BlockInterface
         $pageSize = (int)($this->getPageSize() ?: 8);
         $collection->setPageSize($pageSize);
 
-        return $collection;
+        return $this->productCollection = $collection;
     }
 
     /**
@@ -395,8 +415,15 @@ class ProductSlider extends Template implements BlockInterface
             return '';
         }
 
-        $collection = $this->getProductCollection();
-        if (!$collection || $collection->getSize() == 0) {
+        // Force-load items here (not getSize() — that's a separate COUNT
+        // query). The collection is cached on the block, so the template
+        // reuses the same loaded items without a second round-trip.
+        try {
+            $items = $this->getProductCollection()->getItems();
+        } catch (\Throwable) {
+            return '';
+        }
+        if (empty($items)) {
             return '';
         }
 

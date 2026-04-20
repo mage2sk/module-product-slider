@@ -4,6 +4,34 @@ All notable changes to this extension are documented here. The format
 is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.0.2]
+
+### Fixed
+- **Homepage 500 on slider widget render.** `ProductSlider::getProductCollection()`
+  used `joinField()` (INNER JOIN) against `cataloginventory_stock_status`,
+  which duplicates `entity_id` rows on multi-source / multi-website setups
+  and trips the collection's "Item with the same ID already exists" guard
+  the moment the template iterates the collection. Switched to a raw
+  `getSelect()->joinLeft` scoped to `website_id = 0` + `distinct(true)`, so
+  at most one row per product is returned.
+- Added a `try/catch` around the template's collection load so any residual
+  edge case renders an empty slider instead of a 500.
+
+### Performance
+- **Collection is now cached on the block.** `getProductCollection()` is
+  invoked twice per widget render (once in `_toHtml`, once in the template),
+  and each call previously rebuilt the select + reran all the joins and
+  filters. It now returns the same instance on subsequent calls.
+- **`_toHtml()` guards on `getItems()` instead of `getSize()`,** so the
+  pre-render "is this widget empty?" check and the template iteration share
+  a single SELECT instead of firing a separate `COUNT(*)` query. Net effect:
+  roughly 4 DB round-trips per slider widget per render drops to 1.
+
+## [1.0.1]
+
+### Changed
+- Documentation tidy-up; no functional changes.
+
 ## [1.0.0] -- Initial release
 
 ### Added
