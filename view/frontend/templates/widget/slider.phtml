@@ -26,7 +26,7 @@ $productListItemViewModel = $viewModels->require(ProductListItem::class);
 $config = $block->getSliderConfig();
 
 // Collection is cached on the block, so this is the same instance _toHtml
-// already loaded — getItems() returns the cached array with no extra query.
+// already loaded - getItems() returns the cached array with no extra query.
 // The try/catch is defensive: if some downstream filter still produces
 // duplicate entity_id rows and the load throws, render empty instead of 500.
 try {
