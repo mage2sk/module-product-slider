@@ -1,34 +1,50 @@
 <!-- SEO Meta -->
 <!--
-  Title: Panth Product Slider - Advanced Product Slider Widget for Magento 2 | Panth Infotech
-  Description: Panth Product Slider is a premium Magento 2 extension that adds a fully-featured advanced product slider widget with admin slider management, style presets, badge positions, category-based filtering, autoplay, arrows, dots, sort options, hover effects, and a widget usable on any CMS, category, product, or layout page. Hyva and Luma compatible. Built by Top Rated Plus Magento developer Kishan Savaliya.
-  Keywords: magento 2 product slider, product carousel, related products, featured products slider, swiper magento, magento 2 carousel, magento 2 widget, hyva product slider, luma product slider, panth product slider
+  Title: Magento 2 Product Slider Extension: Admin-Managed Sliders, Responsive Columns, Badges (Hyva + Luma) | Panth Infotech
+  Description: Panth Product Slider adds a fully-featured admin-managed product slider widget to Magento 2. Create unlimited sliders with CRUD admin grid, flexible product selection (category, SKU, sale-only, new arrivals), responsive column counts, style presets, product badges, autoplay, arrow navigation, and embed via widget, layout XML, or CMS directive. Native Hyva (Alpine.js) and Luma (Swiper.js) templates. Works on Magento 2.4.4 to 2.4.8 and PHP 8.1 to 8.4. Built by Top Rated Plus Magento developer Kishan Savaliya.
+  Keywords: magento 2 product slider, magento 2 product carousel, magento 2 slider widget, hyva product slider, luma product slider, magento 2 featured products slider, magento 2 new arrivals slider, magento 2 bestsellers slider, magento 2 homepage slider, magento 2 category slider, admin managed slider magento 2, alpine js product slider
   Author: Kishan Savaliya (Panth Infotech)
-  Canonical: https://github.com/mage2sk/module-product-slider
+  Canonical: https://kishansavaliya.com/magento-2-product-slider.html
 -->
 
-# Panth Product Slider — Advanced Product Slider Widget for Magento 2
+# Magento 2 Product Slider Extension: Admin-Managed Sliders, Responsive Columns, Badges (Hyva + Luma)
 
 [![Magento 2.4.4 - 2.4.8](https://img.shields.io/badge/Magento-2.4.4%20--%202.4.8-orange?logo=magento&logoColor=white)](https://magento.com)
 [![PHP 8.1 - 8.4](https://img.shields.io/badge/PHP-8.1%20--%208.4-blue?logo=php&logoColor=white)](https://php.net)
-[![Hyva + Luma](https://img.shields.io/badge/Theme-Hyva%20%2B%20Luma-0D9488)]()
+[![Hyva + Luma](https://img.shields.io/badge/Themes-Hyva%20%2B%20Luma-14b8a6)](https://www.hyva.io)
+[![Live Demo & Details](https://img.shields.io/badge/Live%20Demo%20%26%20Details-magento--2--product--slider-0D9488?style=flat)](https://kishansavaliya.com/magento-2-product-slider.html)
 [![Packagist](https://img.shields.io/badge/Packagist-mage2kishan%2Fmodule--product--slider-orange?logo=packagist&logoColor=white)](https://packagist.org/packages/mage2kishan/module-product-slider)
-[![GitHub](https://img.shields.io/badge/GitHub-mage2sk%2Fmodule--product--slider-181717?logo=github&logoColor=white)](https://github.com/mage2sk/module-product-slider)
 [![Upwork Top Rated Plus](https://img.shields.io/badge/Upwork-Top%20Rated%20Plus-14a800?logo=upwork&logoColor=white)](https://www.upwork.com/freelancers/~016dd1767321100e21)
-[![Panth Infotech Agency](https://img.shields.io/badge/Agency-Panth%20Infotech-14a800?logo=upwork&logoColor=white)](https://www.upwork.com/agencies/1881421506131960778/)
 [![Website](https://img.shields.io/badge/Website-kishansavaliya.com-0D9488)](https://kishansavaliya.com)
 
-> **Advanced Product Slider Widget for Magento 2** — complete admin slider management, polished style presets, flexible badge positions, category-based product filtering, autoplay, navigation arrows, pagination dots, sort options, hover effects, and a universal widget you can drop on any CMS page, category, product page, or layout block. Fully compatible with **Hyva** and **Luma** themes.
+> **Build and manage product sliders from the Magento admin without writing code.** Panth Product Slider gives you a full CRUD grid to create unlimited sliders, pick products by category, SKU, price range, sale status, or new-arrivals threshold, set responsive column counts per breakpoint, choose a style preset, add product badges, and drop the slider on any page using the widget UI, layout XML, or a CMS directive. Native templates for **Hyva (Alpine.js)** and **Luma (Swiper.js)** are both included.
 
-**Panth Product Slider** is a premium Magento 2 extension that lets merchants build beautiful, conversion-focused product carousels from the admin panel in minutes. Create unlimited sliders with full admin slider management, pick from ready-made style presets, enable badge positions for New / Sale / Hot / Featured tags, filter products by category or attribute, tune autoplay, arrows, dots, and sort options, add smooth hover effects, and embed the slider as a widget on any page of your storefront. The module ships production-ready markup and Alpine.js + Tailwind CSS for **Hyva**, plus Knockout + Swiper for **Luma** — a single extension, one admin, two storefronts.
-
-Whether you want to showcase **featured products**, a **related products** carousel, **bestsellers**, **new arrivals**, or category-specific collections on the homepage, Panth Product Slider gives you the flexibility and speed to do it without writing a single line of code.
+**Product page:** [kishansavaliya.com/magento-2-product-slider.html](https://kishansavaliya.com/magento-2-product-slider.html)
 
 ---
 
-## 🚀 Need Custom Magento 2 Development?
+## Quick Answer
 
-> **Get a free quote for your project in 24 hours** — custom modules, Hyva themes, performance optimization, M1→M2 migrations, and Adobe Commerce Cloud.
+**What is Panth Product Slider?** It is a Magento 2 product slider extension with a full admin CRUD interface, so merchants can create and manage product carousels without touching code. Sliders render on any page through the standard Magento widget system.
+
+**What does it add to my store?**
+
+- An **admin slider grid** under Panth Infotech > Product Slider > Manage Sliders to create, edit, enable, disable, and delete sliders.
+- **Flexible product selection** by category IDs, product IDs, SKUs, price range, sale-only, new arrivals, and stock status.
+- **Responsive column counts** with separate mobile, tablet, and desktop values stored per slider.
+- **Style presets and product badges** (sale percentage, New, Low Stock, Featured) with configurable badge corner position.
+- **Autoplay and arrow navigation**, both configurable per slider.
+- **Three embed methods**: CMS widget directive, layout XML block, and direct PHTML call.
+
+**Which themes are supported?** Both **Hyva** (Alpine.js snap-slider, no jQuery) and **Luma** (Swiper.js via RequireJS). The module auto-detects the active theme through `Panth\Core\Helper\Theme`.
+
+**What does it need?** Magento 2.4.4 to 2.4.8, PHP 8.1 to 8.4, and the free `mage2kishan/module-core` package.
+
+---
+
+## Need Custom Magento 2 Development?
+
+> **Get a free quote for your project in 24 hours** for custom modules, Hyva themes, performance work, M1 to M2 migrations, and Adobe Commerce Cloud.
 
 <p align="center">
   <a href="https://kishansavaliya.com/get-quote">
@@ -40,24 +56,24 @@ Whether you want to showcase **featured products**, a **related products** carou
 <tr>
 <td width="50%" align="center">
 
-### 🏆 Kishan Savaliya
+### Kishan Savaliya
 **Top Rated Plus on Upwork**
 
 [![Hire on Upwork](https://img.shields.io/badge/Hire%20on%20Upwork-Top%20Rated%20Plus-14a800?style=for-the-badge&logo=upwork&logoColor=white)](https://www.upwork.com/freelancers/~016dd1767321100e21)
 
-100% Job Success • 10+ Years Magento Experience
-Adobe Certified • Hyva Specialist
+100% Job Success * 10+ Years Magento Experience
+Adobe Certified * Hyva Specialist
 
 </td>
 <td width="50%" align="center">
 
-### 🏢 Panth Infotech Agency
+### Panth Infotech Agency
 **Magento Development Team**
 
 [![Visit Agency](https://img.shields.io/badge/Visit%20Agency-Panth%20Infotech-14a800?style=for-the-badge&logo=upwork&logoColor=white)](https://www.upwork.com/agencies/1881421506131960778/)
 
-Custom Modules • Theme Design • Migrations
-Performance • SEO • Adobe Commerce Cloud
+Custom Modules * Theme Design * Migrations
+Performance * SEO * Adobe Commerce Cloud
 
 </td>
 </tr>
@@ -69,13 +85,13 @@ Performance • SEO • Adobe Commerce Cloud
 
 ## Table of Contents
 
+- [Who Is It For](#who-is-it-for)
 - [Key Features](#key-features)
-- [Use Cases](#use-cases)
 - [Compatibility](#compatibility)
 - [Installation](#installation)
 - [Configuration](#configuration)
+- [How It Works](#how-it-works)
 - [Widget Usage](#widget-usage)
-- [Style Presets & Badges](#style-presets--badges)
 - [FAQ](#faq)
 - [Support](#support)
 - [About Panth Infotech](#about-panth-infotech)
@@ -83,70 +99,76 @@ Performance • SEO • Adobe Commerce Cloud
 
 ---
 
+## Who Is It For
+
+- **Stores with large catalogs** that need a fast way to showcase featured products, new arrivals, bestsellers, or on-sale items on the homepage or category pages.
+- **Merchants who want admin control** over what appears in each slider, without asking a developer to edit layout XML for every change.
+- **Hyva storefronts** that need a slider built on Alpine.js with no jQuery pulled back in.
+- **Luma storefronts** that want a Swiper.js-powered carousel that loads only on pages where the slider renders.
+- **Marketing teams** running promotions who need scheduled or temporary product showcases on landing pages and CMS blocks.
+
+---
+
 ## Key Features
 
 ### Admin Slider Management
 
-- **Unlimited sliders** — create, edit, enable/disable, duplicate, and delete unlimited product sliders
-- **Full CRUD grid** — familiar Magento admin grid with filters, mass actions, and store-view scope
-- **Per-slider settings** — title, status, store views, sort order, product source, and slide options per entity
-- **Schedule sliders** — optional start and end dates to run promotional sliders automatically
+- **Full CRUD grid** under Panth Infotech > Product Slider > Manage Sliders for creating, editing, enabling, disabling, and deleting sliders.
+- **Per-slider settings** for title, identifier, store view scope, heading tag, show/hide heading, and description HTML below the heading.
+- **Stored in the `panth_product_slider` table** with a unique identifier index and an active-status index for fast lookups.
 
-### Product Selection & Category Filtering
+### Product Selection and Filtering
 
-- **Category-based filtering** — pick one or multiple categories to pull products from
-- **Manual product selection** — hand-pick specific SKUs for full control
-- **Dynamic sources** — featured, new arrivals, bestsellers, on-sale, most-viewed, and related products
-- **Sort options** — newest, price asc/desc, name, popularity, random, or custom sort order
-- **Product limit** — cap the number of products per slider (default 12, up to 50)
+- **Category-based filtering** by one or multiple category IDs.
+- **Manual product selection** by product IDs or SKUs.
+- **Sale-only filter** that restricts the slider to products with an active special price.
+- **New arrivals filter** based on a configurable number of days since product creation.
+- **Price range filter** with from/to decimal values.
+- **Exclude out-of-stock** toggle to hide unavailable products.
+- **Sort options**: by position, price asc/desc, name, or custom ordering with direction control.
+- **Product limit** set per slider (default 8).
 
-### Style Presets
+### Responsive Layout
 
-- **Ready-made presets** — choose from modern, classic, minimal, boxed, and borderless presets
-- **Color & spacing tokens** — inherits colors and radii from Panth Theme Customizer if installed
-- **Responsive breakpoints** — separate slides-per-view for mobile, tablet, and desktop
-- **Gap control** — configurable horizontal gap between slides
+- **Separate column counts for mobile, tablet, and desktop** stored per slider.
+- **Global defaults** in system configuration (Default Columns Mobile/Tablet/Desktop and Default Products Per Slider).
+- **Tailwind snap-slider breakpoints** on Hyva and **Swiper.js breakpoints** on Luma.
 
-### Badge Positions
+### Style Presets and Badges
 
-- **Multiple badge slots** — top-left, top-right, bottom-left, bottom-right corners
-- **Built-in badge types** — New, Sale, Hot, Featured, and custom text badges
-- **Auto-apply rules** — show Sale badge automatically when a special price is active
-- **Custom colors** — override badge background and text color per slider
+- **Style presets**: Default, Modern, Minimal, Bold, Custom, with per-slider card shadow and hover effect overrides.
+- **Custom CSS class** field for additional per-slider styling.
+- **Product badges**: sale percentage, New, Low Stock, and Featured, with configurable corner position (top-left, top-right, bottom-left, bottom-right).
+- **Auto-apply Sale badge** when a special price is active on a product.
+- Arrow and card colors are managed through the theme configuration file (`theme-config.json`, product-slider section).
 
 ### Slider Behavior
 
-- **Autoplay** — optional autoplay with configurable delay and pause-on-hover
-- **Navigation arrows** — show/hide left/right arrows with custom position
-- **Pagination dots** — toggle dots, bullets, progress bar, or fraction indicator
-- **Loop mode** — infinite loop for continuous browsing
-- **Touch & swipe** — native touch support on mobile, keyboard and mouse-wheel on desktop
-- **Hover effects** — smooth image swap, zoom, quick-view, add-to-cart, wishlist, and compare on hover
+- **Autoplay** with configurable interval (default 3000 ms) and pause-on-hover.
+- **Arrow navigation** with configurable colors, size, and position.
+- **Pagination pager** togglable per slider.
+- **Loop mode** for continuous browsing.
+- **Touch and swipe** support on mobile natively through the respective libraries.
 
-### Widget for Any Page
+### Display Options
 
-- **Magento widget** — drop the slider on any CMS page, category page, product page, or layout XML block
-- **Layout handle placement** — target specific pages via layout XML (`cms_index_index`, `catalog_product_view`, etc.)
-- **Shortcode / block reference** — reuse the same slider across multiple pages
-- **Per-placement overrides** — customize title, limit, autoplay per placement
+- **Show or hide Add to Cart** button per slider.
+- **Show or hide product details** (name, price) per slider.
+- **Show or hide product rating** per slider.
+- **Show or hide heading** above the slider.
 
-### Hyva + Luma Compatibility
+### Three Embed Methods
 
-- **Hyva** — Alpine.js + Tailwind CSS, zero jQuery, Core Web Vitals friendly
-- **Luma** — Knockout + Swiper with RequireJS, full backwards compatibility
-- **Automatic theme detection** via `Panth\Core\Helper\Theme`
-- **Shared admin** — a single admin UI drives both storefronts
+- **CMS widget directive**: insert via Content > Widgets or paste a `{{widget ...}}` shortcode directly in a CMS block.
+- **Layout XML block**: reference `Panth\ProductSlider\Block\Widget\ProductSlider` in any layout handle.
+- **Direct PHTML call**: use the `SliderById` block class to pull a slider by ID or identifier into any template.
 
----
+### Hyva and Luma Ready
 
-## Use Cases
-
-- Homepage **featured products** carousel
-- **Related products** and **upsell** sliders on product pages
-- **New arrivals** and **bestseller** sliders on the homepage
-- **Category-specific** sliders (e.g. "Top Picks in Electronics")
-- **Seasonal promotions** scheduled with start/end dates
-- **Landing-page** sliders for marketing campaigns and ad traffic
+- **Native Hyva template** using Alpine.js snap-slider with `ProductListItem` view model, zero jQuery.
+- **Native Luma template** using Swiper.js, loaded via RequireJS only on pages where the slider renders.
+- **Automatic theme detection** via `Panth\Core\Helper\Theme`.
+- **Shared admin**: one admin UI drives both storefronts.
 
 ---
 
@@ -156,9 +178,9 @@ Performance • SEO • Adobe Commerce Cloud
 |---|---|
 | Magento Open Source | 2.4.4, 2.4.5, 2.4.6, 2.4.7, 2.4.8 |
 | Adobe Commerce | 2.4.4, 2.4.5, 2.4.6, 2.4.7, 2.4.8 |
-| Adobe Commerce Cloud | 2.4.4 — 2.4.8 |
+| Adobe Commerce Cloud | 2.4.4 to 2.4.8 |
 | PHP | 8.1.x, 8.2.x, 8.3.x, 8.4.x |
-| Hyva Theme | 1.3+ |
+| Hyva Theme | 1.3+ (native Alpine.js support) |
 | Luma Theme | Native support |
 | Required Dependency | `mage2kishan/module-core` (free) |
 
@@ -179,42 +201,51 @@ bin/magento cache:flush
 
 ### Manual Installation via ZIP
 
-1. Download the latest release ZIP from [Packagist](https://packagist.org/packages/mage2kishan/module-product-slider) or the [Adobe Commerce Marketplace](https://commercemarketplace.adobe.com)
-2. Extract the contents to `app/code/Panth/ProductSlider/` in your Magento installation
-3. Install the free dependency: `composer require mage2kishan/module-core`
-4. Run the commands above starting from `bin/magento module:enable`
+1. Download the latest release from [Packagist](https://packagist.org/packages/mage2kishan/module-product-slider) or from the [product page](https://kishansavaliya.com/magento-2-product-slider.html).
+2. Extract it to `app/code/Panth/ProductSlider/` in your Magento install.
+3. Make sure `Panth_Core` is installed too (required dependency).
+4. Run the commands above starting from `bin/magento module:enable`.
 
 ### Verify Installation
 
 ```bash
 bin/magento module:status Panth_ProductSlider
-# Expected output: Module is enabled
+# Expected: Module is enabled
 ```
 
-Then navigate to **Admin → Panth Infotech → Product Slider → Manage Sliders**.
+After install, open:
+```
+Admin -> Panth Infotech -> Product Slider -> Manage Sliders
+```
 
 ---
 
 ## Configuration
 
-Global settings live under **Stores → Configuration → Panth Extensions → Product Slider**:
+Go to **Stores -> Configuration -> Panth Extensions -> Product Slider**.
 
-| Setting | Default | Description |
-|---|---|---|
-| Enable Module | Yes | Master toggle for the extension |
-| Default Style Preset | Modern | Default visual preset for new sliders |
-| Default Autoplay | No | Whether new sliders autoplay by default |
-| Autoplay Delay (ms) | 4000 | Delay between slide transitions |
-| Show Arrows | Yes | Default arrows visibility for new sliders |
-| Show Dots | Yes | Default pagination dots visibility |
-| Loop | Yes | Default loop mode |
-| Slides Per View (Desktop) | 4 | Default desktop breakpoint |
-| Slides Per View (Tablet) | 3 | Default tablet breakpoint |
-| Slides Per View (Mobile) | 1 | Default mobile breakpoint |
-| Hover Effect | Image Swap | Default hover interaction |
-| Enable Badges | Yes | Show New/Sale/Hot/Featured badges |
+| Setting | Group | Default | Description |
+|---|---|---|---|
+| Enable Module | General Settings | Yes | Master toggle. When disabled, no sliders render on the frontend. |
+| Default Columns (Mobile) | Default Layout | 1 | Default mobile column count for new sliders. |
+| Default Columns (Tablet) | Default Layout | 2 | Default tablet column count for new sliders. |
+| Default Columns (Desktop) | Default Layout | 4 | Default desktop column count for new sliders. |
+| Default Products Per Slider | Default Layout | 8 | Default number of products loaded per slider. |
 
-Each slider can override global defaults.
+Design and colors (arrow color, card styling) are managed through the theme config file. Product badges are managed through the Smart Product Badges module when installed.
+
+Each slider can override the global column and product-count defaults in its own edit form.
+
+---
+
+## How It Works
+
+1. Create a slider in **Admin -> Panth Infotech -> Product Slider -> Manage Sliders**. Set the title, store views, product selection criteria, column counts, style preset, and autoplay options.
+2. The slider entity is saved to the `panth_product_slider` database table with a unique identifier.
+3. Embed the slider on a page using the Magento widget UI, a layout XML block reference, or a CMS widget directive.
+4. On page load, the `ProductSlider` block class reads the slider entity, builds a product collection filtered by your criteria, and passes it to the appropriate template.
+5. On **Hyva**, the template renders a native Alpine.js snap-slider with Tailwind CSS classes. On **Luma**, it renders a Swiper.js carousel loaded via RequireJS.
+6. The product collection is cached on the block instance, so calling `getProductCollection()` more than once per request costs a single database query.
 
 ---
 
@@ -222,91 +253,64 @@ Each slider can override global defaults.
 
 ### Via Magento Widget UI
 
-1. Go to **Content → Widgets → Add Widget**
-2. Select **Panth Product Slider** as the widget type
-3. Pick the design theme and layout updates (CMS page, category, product page, etc.)
-4. Choose the saved slider and optional overrides (title, limit, autoplay)
-5. Save and flush cache
+1. Go to **Content -> Widgets -> Add Widget**.
+2. Select **Panth Product Slider** as the widget type.
+3. Pick the design theme and layout updates (CMS page, category, product page, etc.).
+4. Choose the saved slider by identifier or ID.
+5. Save and flush cache.
 
 ### Via Layout XML
 
 ```xml
 <referenceContainer name="content">
-    <block class="Panth\ProductSlider\Block\Widget\Slider"
+    <block class="Panth\ProductSlider\Block\Widget\ProductSlider"
            name="home.featured.slider"
            template="Panth_ProductSlider::widget/slider.phtml">
         <arguments>
             <argument name="slider_id" xsi:type="number">1</argument>
-            <argument name="title" xsi:type="string">Featured Products</argument>
         </arguments>
     </block>
 </referenceContainer>
 ```
 
-### Via CMS Page / Block
+### Via CMS Page or Block
 
 ```
-{{widget type="Panth\ProductSlider\Block\Widget\Slider" slider_id="1" title="Top Picks"}}
+{{widget type="Panth\ProductSlider\Block\Widget\ProductSlider" slider_id="1"}}
 ```
 
----
-
-## Style Presets & Badges
-
-### Presets
-
-| Preset | Description |
-|---|---|
-| Modern | Clean card with subtle shadow, rounded corners, large arrows |
-| Classic | Traditional border, centered pagination dots |
-| Minimal | Borderless cards, small arrows, wide gap |
-| Boxed | Full-card background with inner padding |
-| Borderless | No borders, flat design for minimalist themes |
-
-### Badge Positions
-
-| Slot | Typical Use |
-|---|---|
-| Top-Left | New, Hot |
-| Top-Right | Sale, Featured |
-| Bottom-Left | Custom text (e.g. "Free Shipping") |
-| Bottom-Right | Stock status, discount percentage |
+After saving a slider in the admin, the edit form shows the exact embed code for all three methods.
 
 ---
 
 ## FAQ
 
-### Does Panth Product Slider work with Hyva?
+### Does Panth Product Slider work on Hyva themes?
+Yes. The module ships a native Alpine.js snap-slider template for Hyva with no jQuery, Knockout, or RequireJS. Theme detection is automatic through `Panth_Core`.
 
-Yes. The module ships dedicated Hyva templates using Alpine.js + Tailwind CSS. It automatically switches between Hyva and Luma markup via `Panth\Core\Helper\Theme`.
+### Can I create sliders from the admin without editing XML?
+Yes. The admin CRUD grid at Panth Infotech > Product Slider > Manage Sliders handles all slider creation, editing, and deletion. No code changes are needed.
 
-### Can I show a slider on the homepage?
-
-Yes — add it via **Content → Widgets** with layout handle `cms_index_index`, or insert the widget shortcode directly into the homepage CMS block.
+### How do I show a slider on the homepage?
+Add it via Content -> Widgets with the layout handle `cms_index_index`, or paste the widget directive directly into the homepage CMS block.
 
 ### Can I filter products by category?
+Yes. In the slider edit form, add one or multiple category IDs. You can also hand-pick products by ID or SKU, or combine criteria like sale-only and new arrivals.
 
-Yes. In the admin slider editor, pick one or multiple categories, or switch to Manual selection and hand-pick SKUs.
+### Will it slow down my category or CMS pages?
+No. On Hyva the slider uses Alpine.js with no added dependencies. On Luma, Swiper.js loads only on pages where the slider renders. Images use native lazy loading. The product collection query runs once per block instance and is not repeated on the same request.
 
-### Does it support autoplay and looping?
+### Can I have different column counts on mobile and desktop?
+Yes. Each slider stores separate mobile, tablet, and desktop column counts. Global defaults are set in system configuration and can be overridden per slider.
 
-Yes. Both are configurable globally and per-slider, with autoplay delay, pause-on-hover, and infinite loop options.
+### Does it support autoplay?
+Yes. Autoplay is togglable per slider, with a configurable interval (default 3000 ms) and pause-on-hover behavior.
 
-### Can I customize badge colors and positions?
+### Does it work with multi-store setups?
+Yes. Each slider stores a `store_ids` value, so you can restrict a slider to specific store views. The system configuration respects Magento's default, website, and store-view scope order.
 
-Yes. Each slider has its own badge settings, and you can override badge text, colors, and corner position per badge type.
-
-### Does it slow down my store?
-
-No. On Hyva the slider uses Alpine.js with no jQuery. On Luma it lazy-loads Swiper only on pages where the slider renders. Images use native lazy loading.
-
-### Does it support multi-store?
-
-Yes. Every slider supports per-store-view scope for title, product selection, and visibility.
-
-### Is it MEQP compliant?
-
-Yes. The module passes Adobe's Magento Extension Quality Program with zero severity-10 violations.
+### Does Panth Product Slider need Panth Core?
+Yes. `mage2kishan/module-core` is a free, required dependency. Composer installs it automatically.
 
 ---
 
@@ -314,6 +318,7 @@ Yes. The module passes Adobe's Magento Extension Quality Program with zero sever
 
 | Channel | Contact |
 |---|---|
+| Product Page | [kishansavaliya.com/magento-2-product-slider.html](https://kishansavaliya.com/magento-2-product-slider.html) |
 | Email | kishansavaliyakb@gmail.com |
 | Website | [kishansavaliya.com](https://kishansavaliya.com) |
 | WhatsApp | +91 84012 70422 |
@@ -321,11 +326,11 @@ Yes. The module passes Adobe's Magento Extension Quality Program with zero sever
 | Upwork (Top Rated Plus) | [Hire Kishan Savaliya](https://www.upwork.com/freelancers/~016dd1767321100e21) |
 | Upwork Agency | [Panth Infotech](https://www.upwork.com/agencies/1881421506131960778/) |
 
-Response time: 1-2 business days. Priority support is available with paid support plans.
+Response time: 1-2 business days.
 
-### 💼 Need Custom Magento Development?
+### Need Custom Magento Development?
 
-Looking for **custom Magento module development**, **Hyva theme customization**, **store migrations**, or **performance optimization**? Get a free quote in 24 hours:
+Looking for **custom Magento module development**, **Hyva theme work**, **store migrations**, or **performance tuning**? Get a free quote in 24 hours:
 
 <p align="center">
   <a href="https://kishansavaliya.com/get-quote">
@@ -342,48 +347,46 @@ Looking for **custom Magento module development**, **Hyva theme customization**,
     <img src="https://img.shields.io/badge/Visit-Panth%20Infotech%20Agency-14a800?style=for-the-badge&logo=upwork&logoColor=white" alt="Visit Agency" />
   </a>
   &nbsp;&nbsp;
-  <a href="https://kishansavaliya.com">
-    <img src="https://img.shields.io/badge/Visit%20Website-kishansavaliya.com-0D9488?style=for-the-badge" alt="Visit Website" />
+  <a href="https://kishansavaliya.com/magento-2-product-slider.html">
+    <img src="https://img.shields.io/badge/View%20Product%20Page-magento--2--product--slider-0D9488?style=for-the-badge" alt="View Product Page" />
   </a>
 </p>
-
----
-
-## License
-
-Panth Product Slider is licensed under a proprietary commercial license — see `LICENSE.txt`. One license covers one production Magento installation (multi-store allowed within that installation).
 
 ---
 
 ## About Panth Infotech
 
-Built and maintained by **Kishan Savaliya** — [kishansavaliya.com](https://kishansavaliya.com) — a **Top Rated Plus** Magento developer on Upwork with 10+ years of eCommerce experience.
+Built and maintained by **Kishan Savaliya** ([kishansavaliya.com](https://kishansavaliya.com)), a **Top Rated Plus** Magento developer on Upwork with 10+ years of eCommerce experience.
 
-**Panth Infotech** is a Magento 2 development agency specializing in high-quality, security-focused extensions and themes for both Hyva and Luma storefronts. Our extension suite covers SEO, performance, checkout, product presentation, customer engagement, and store management — over 34 modules built to MEQP standards and tested across Magento 2.4.4 to 2.4.8.
+**Panth Infotech** is a Magento 2 development agency that builds high quality, security focused extensions and themes for both Hyva and Luma storefronts. The extension suite covers SEO, performance, checkout, product presentation, customer engagement, and store management, with each module built to MEQP standards and tested across Magento 2.4.4 to 2.4.8.
 
-Browse the full extension catalog on the [Adobe Commerce Marketplace](https://commercemarketplace.adobe.com) or [Packagist](https://packagist.org/packages/mage2kishan/).
+Browse the full extension catalog on our [Magento extensions page](https://kishansavaliya.com/magento-extensions.html) or on [Packagist](https://packagist.org/packages/mage2kishan/).
 
-### Quick Links
+---
 
-- 🌐 **Website:** [kishansavaliya.com](https://kishansavaliya.com)
-- 💬 **Get a Quote:** [kishansavaliya.com/get-quote](https://kishansavaliya.com/get-quote)
-- 👨‍💻 **Upwork Profile (Top Rated Plus):** [upwork.com/freelancers/~016dd1767321100e21](https://www.upwork.com/freelancers/~016dd1767321100e21)
-- 🏢 **Upwork Agency:** [upwork.com/agencies/1881421506131960778](https://www.upwork.com/agencies/1881421506131960778/)
-- 📦 **Packagist:** [packagist.org/packages/mage2kishan/module-product-slider](https://packagist.org/packages/mage2kishan/module-product-slider)
-- 🐙 **GitHub:** [github.com/mage2sk/module-product-slider](https://github.com/mage2sk/module-product-slider)
-- 🛒 **Adobe Marketplace:** [commercemarketplace.adobe.com](https://commercemarketplace.adobe.com)
-- 📧 **Email:** kishansavaliyakb@gmail.com
-- 📱 **WhatsApp:** +91 84012 70422
+## Quick Links
+
+| Resource | Link |
+|---|---|
+| **Product Page** | [magento-2-product-slider.html](https://kishansavaliya.com/magento-2-product-slider.html) |
+| **Packagist** | [mage2kishan/module-product-slider](https://packagist.org/packages/mage2kishan/module-product-slider) |
+| **GitHub** | [mage2sk/module-product-slider](https://github.com/mage2sk/module-product-slider) |
+| **Website** | [kishansavaliya.com](https://kishansavaliya.com) |
+| **Free Quote** | [kishansavaliya.com/get-quote](https://kishansavaliya.com/get-quote) |
+| **Upwork (Top Rated Plus)** | [Hire Kishan Savaliya](https://www.upwork.com/freelancers/~016dd1767321100e21) |
+| **Upwork Agency** | [Panth Infotech](https://www.upwork.com/agencies/1881421506131960778/) |
+| **Email** | kishansavaliyakb@gmail.com |
+| **WhatsApp** | +91 84012 70422 |
 
 ---
 
 <p align="center">
-  <strong>Ready to upgrade your Magento 2 store?</strong><br/>
-  <a href="https://kishansavaliya.com/get-quote">
-    <img src="https://img.shields.io/badge/%F0%9F%9A%80%20Get%20Started%20%E2%86%92-Free%20Quote%20in%2024h-DC2626?style=for-the-badge" alt="Get Started" />
+  <strong>Ready to add product sliders to your Magento 2 store?</strong><br/>
+  <a href="https://kishansavaliya.com/magento-2-product-slider.html">
+    <img src="https://img.shields.io/badge/%F0%9F%9A%80%20See%20Product%20Slider%20%E2%86%92-Product%20Page%20%26%20Demo-DC2626?style=for-the-badge" alt="See Product Slider" />
   </a>
 </p>
 
 ---
 
-**SEO Keywords:** magento 2 product slider, product carousel, related products, featured products slider, swiper magento, magento 2 carousel widget, magento 2 product carousel extension, hyva product slider, luma product slider, magento 2 bestsellers slider, new arrivals slider magento, magento 2 category products slider, magento 2 homepage slider, magento 2 upsell slider, magento 2 cross-sell slider, product slider widget magento 2, magento 2 owl carousel, magento 2 slick slider, magento 2 autoplay slider, magento 2 touch slider mobile, magento 2.4.8 slider, php 8.4 slider module, panth product slider, panth infotech, mage2kishan, mage2sk, kishan savaliya magento, top rated plus magento freelancer, hire magento developer upwork, custom magento development, magento 2 hyva development, magento 2 luma customization, magento 2 performance optimization, magento 2 conversion rate optimization
+**SEO Keywords:** magento 2 product slider, magento 2 product carousel, magento 2 slider widget, magento 2 product slider extension, magento 2 product slider module, hyva product slider, hyva alpine js slider, luma product slider, magento 2 featured products slider, magento 2 new arrivals slider, magento 2 bestsellers slider, magento 2 homepage slider, magento 2 category products slider, magento 2 admin managed slider, magento 2 swiper slider, magento 2 snap slider, magento 2 autoplay slider, magento 2 responsive product carousel, magento 2 product badge slider, magento 2 sale products slider, magento 2 widget slider, magento 2 cms slider, magento 2.4.8 slider, php 8.4 magento slider, mage2kishan product slider, panth product slider, panth infotech, kishan savaliya magento, top rated plus upwork, hire magento developer, custom magento development, magento 2 hyva development
