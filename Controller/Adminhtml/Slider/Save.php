@@ -32,15 +32,12 @@ class Save extends Action implements HttpPostActionInterface
             return $resultRedirect->setPath('*/*/');
         }
 
-        // Clean empty slider_id
         if (isset($data['slider_id']) && $data['slider_id'] === '') {
             unset($data['slider_id']);
         }
 
-        // Remove form_key
         unset($data['form_key']);
 
-        // Validate required fields
         if (empty($data['identifier'])) {
             $this->messageManager->addErrorMessage(__('The identifier field is required.'));
             $this->dataPersistor->set('panth_productslider_slider', $data);

@@ -1,9 +1,4 @@
 <?php
-/**
- * Form data provider for Slider entity
- *
- * @package Panth_ProductSlider
- */
 declare(strict_types=1);
 
 namespace Panth\ProductSlider\Ui\DataProvider;
@@ -14,25 +9,10 @@ use Panth\ProductSlider\Model\ResourceModel\Slider\CollectionFactory;
 
 class SliderFormDataProvider extends AbstractDataProvider
 {
-    /**
-     * @var array|null
-     */
     private ?array $loadedData = null;
 
-    /**
-     * @var DataPersistorInterface
-     */
     private DataPersistorInterface $dataPersistor;
 
-    /**
-     * @param string $name
-     * @param string $primaryFieldName
-     * @param string $requestFieldName
-     * @param CollectionFactory $collectionFactory
-     * @param DataPersistorInterface $dataPersistor
-     * @param array $meta
-     * @param array $data
-     */
     public function __construct(
         string $name,
         string $primaryFieldName,
@@ -47,11 +27,6 @@ class SliderFormDataProvider extends AbstractDataProvider
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
     }
 
-    /**
-     * Get data for the form
-     *
-     * @return array
-     */
     public function getData(): array
     {
         if ($this->loadedData !== null) {

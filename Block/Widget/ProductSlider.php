@@ -1,10 +1,4 @@
 <?php
-/**
- * Panth ProductSlider Widget Block
- *
- * @package Panth_ProductSlider
- * @author Panth
- */
 declare(strict_types=1);
 
 namespace Panth\ProductSlider\Block\Widget;
@@ -23,78 +17,28 @@ use Magento\Catalog\Helper\Image as ImageHelper;
 
 class ProductSlider extends Template implements BlockInterface
 {
-    /**
-     * @var string
-     */
     protected $_template = 'Panth_ProductSlider::luma/widget/slider.phtml';
 
-    /**
-     * @var CollectionFactory
-     */
     private CollectionFactory $productCollectionFactory;
 
-    /**
-     * @var Visibility
-     */
     private Visibility $catalogProductVisibility;
 
-    /**
-     * @var StockStatusFactory
-     */
     private StockStatusFactory $stockStatusFactory;
 
-    /**
-     * @var ProductSliderHelper
-     */
     private ProductSliderHelper $sliderHelper;
 
-    /**
-     * @var BadgeHelper
-     */
     private BadgeHelper $badgeHelper;
 
-    /**
-     * @var TimezoneInterface
-     */
     private TimezoneInterface $timezone;
 
-    /**
-     * @var PriceCurrencyInterface
-     */
     private PriceCurrencyInterface $priceCurrency;
 
-    /**
-     * @var \Panth\Core\Helper\Theme
-     */
     private \Panth\Core\Helper\Theme $themeHelper;
 
-    /**
-     * @var ImageHelper
-     */
     private ImageHelper $imageHelper;
 
-    /**
-     * Cached product collection so getProductCollection() only builds the
-     * select + joins once per render (it is called from both _toHtml and
-     * the template).
-     *
-     * @var \Magento\Catalog\Model\ResourceModel\Product\Collection|null
-     */
     private ?\Magento\Catalog\Model\ResourceModel\Product\Collection $productCollection = null;
 
-    /**
-     * @param Context $context
-     * @param CollectionFactory $productCollectionFactory
-     * @param Visibility $catalogProductVisibility
-     * @param StockStatusFactory $stockStatusFactory
-     * @param ProductSliderHelper $sliderHelper
-     * @param BadgeHelper $badgeHelper
-     * @param TimezoneInterface $timezone
-     * @param PriceCurrencyInterface $priceCurrency
-     * @param \Panth\Core\Helper\Theme $themeHelper
-     * @param ImageHelper $imageHelper
-     * @param array $data
-     */
     public function __construct(
         Context $context,
         CollectionFactory $productCollectionFactory,
@@ -120,15 +64,6 @@ class ProductSlider extends Template implements BlockInterface
         parent::__construct($context, $data);
     }
 
-    /**
-     * Get resized product image URL
-     *
-     * @param \Magento\Catalog\Model\Product $product
-     * @param string $imageId
-     * @param int $width
-     * @param int $height
-     * @return string
-     */
     public function getProductImageUrl($product, string $imageId = 'category_page_grid', int $width = 300, int $height = 300): string
     {
         return $this->imageHelper->init($product, $imageId)
@@ -136,9 +71,6 @@ class ProductSlider extends Template implements BlockInterface
             ->getUrl();
     }
 
-    /**
-     * Switch template based on theme: Hyva uses snap-slider, Luma uses Swiper.js
-     */
     public function getTemplate()
     {
         if ($this->themeHelper->isHyva()) {
@@ -147,11 +79,6 @@ class ProductSlider extends Template implements BlockInterface
         return parent::getTemplate();
     }
 
-    /**
-     * Get product collection with all filters applied
-     *
-     * @return \Magento\Catalog\Model\ResourceModel\Product\Collection
-     */
     public function getProductCollection()
     {
         if ($this->productCollection !== null) {
@@ -176,13 +103,11 @@ class ProductSlider extends Template implements BlockInterface
             ->setVisibility($this->catalogProductVisibility->getVisibleInCatalogIds())
             ->addStoreFilter($this->_storeManager->getStore()->getId());
 
-        // Apply category filter
         $categoryIds = $this->getCategoryIds();
         if ($categoryIds) {
             $collection->addCategoriesFilter(['in' => $this->sliderHelper->parseIds($categoryIds)]);
         }
 
-        // Apply product ID filter (preserve order using FIELD())
         $productIds = $this->getProductIds();
         if ($productIds) {
             $ids = $this->sliderHelper->parseIds($productIds);
@@ -192,19 +117,16 @@ class ProductSlider extends Template implements BlockInterface
             );
         }
 
-        // Apply SKU filter
         $productSkus = $this->getProductSkus();
         if ($productSkus) {
             $collection->addFieldToFilter('sku', ['in' => $this->sliderHelper->parseIds($productSkus)]);
         }
 
-        // Apply sale products filter
         if ($this->getSaleProductsOnly()) {
             $collection->addAttributeToFilter('special_price', ['notnull' => true])
                 ->addAttributeToFilter('special_price', ['gt' => 0]);
         }
 
-        // Apply new products filter
         $newDays = $this->getNewProductsDays();
         if ($newDays) {
             $date = new \DateTime();
@@ -212,7 +134,6 @@ class ProductSlider extends Template implements BlockInterface
             $collection->addFieldToFilter('created_at', ['gteq' => $date->format('Y-m-d H:i:s')]);
         }
 
-        // Apply price range filter
         $priceFrom = $this->getPriceFrom();
         if ($priceFrom) {
             $collection->addAttributeToFilter('price', ['gteq' => $priceFrom]);
@@ -223,12 +144,6 @@ class ProductSlider extends Template implements BlockInterface
             $collection->addAttributeToFilter('price', ['lteq' => $priceTo]);
         }
 
-        // Exclude out of stock — joinField uses an INNER JOIN on stock_status
-        // which duplicates entity_id rows when a product has multiple stock
-        // entries (multi-source / multi-website), tripping the collection's
-        // "Item with the same ID already exists" guard. Use joinLeft scoped
-        // to the default stock (website_id = 0) and force DISTINCT as belt
-        // and braces.
         if ($this->getExcludeOutOfStock()) {
             $collection->getSelect()->joinLeft(
                 ['_stock_status' => $collection->getTable('cataloginventory_stock_status')],
@@ -241,7 +156,6 @@ class ProductSlider extends Template implements BlockInterface
             $collection->getSelect()->distinct(true);
         }
 
-        // Apply sorting
         $sortBy = $this->getSortBy() ?: 'position';
         $sortDirection = $this->getSortDirection() ?: 'ASC';
 
@@ -251,18 +165,12 @@ class ProductSlider extends Template implements BlockInterface
             $collection->addAttributeToSort($sortBy, $sortDirection);
         }
 
-        // Apply page size limit
         $pageSize = (int)($this->getPageSize() ?: 8);
         $collection->setPageSize($pageSize);
 
         return $this->productCollection = $collection;
     }
 
-    /**
-     * Get slider configuration
-     *
-     * @return array
-     */
     public function getSliderConfig(): array
     {
         $preset = $this->getStylePreset() ?: 'default';
@@ -285,27 +193,19 @@ class ProductSlider extends Template implements BlockInterface
         ];
     }
 
-    /**
-     * Get slider CSS classes
-     *
-     * @return string
-     */
     public function getSliderCssClasses(): string
     {
         $config = $this->getSliderConfig();
         $classes = [];
 
-        // Add shadow class
         if ($config['card_shadow']) {
             $classes[] = $this->sliderHelper->getShadowClass($config['card_shadow']);
         }
 
-        // Add hover effect class
         if ($config['card_hover']) {
             $classes[] = $this->sliderHelper->getHoverEffectClass($config['card_hover']);
         }
 
-        // Add custom classes
         if ($config['custom_css_class']) {
             $classes[] = $config['custom_css_class'];
         }
@@ -313,11 +213,6 @@ class ProductSlider extends Template implements BlockInterface
         return implode(' ', $classes);
     }
 
-    /**
-     * Get column track classes
-     *
-     * @return string
-     */
     public function getColumnTrackClasses(): string
     {
         $config = $this->getSliderConfig();
@@ -328,12 +223,6 @@ class ProductSlider extends Template implements BlockInterface
         );
     }
 
-    /**
-     * Get product badges
-     *
-     * @param \Magento\Catalog\Model\Product $product
-     * @return array
-     */
     public function getProductBadges($product): array
     {
         if ($this->getEnableBadges() !== '1') {
@@ -346,34 +235,18 @@ class ProductSlider extends Template implements BlockInterface
         return $this->badgeHelper->getBadges($product, $badgeTypes, $newDays);
     }
 
-    /**
-     * Get badge position class
-     *
-     * @return string
-     */
     public function getBadgePositionClass(): string
     {
         $position = $this->getBadgePosition() ?: 'top-left';
         return $this->badgeHelper->getBadgePositionClass($position);
     }
 
-    /**
-     * Get unique slider ID
-     *
-     * @return string
-     */
     public function getSliderId(): string
     {
         $widgetId = $this->getData('widget_id');
         return 'product-slider-' . ($widgetId ?: uniqid());
     }
 
-    /**
-     * Format price with currency symbol
-     *
-     * @param float $price
-     * @return string
-     */
     public function formatPrice($price): string
     {
         return $this->priceCurrency->format(
@@ -384,40 +257,22 @@ class ProductSlider extends Template implements BlockInterface
         );
     }
 
-    /**
-     * Get media base URL
-     *
-     * @return string
-     */
     public function getMediaBaseUrl(): string
     {
         return $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
     }
 
-    /**
-     * Check if module is enabled
-     *
-     * @return bool
-     */
     public function isModuleEnabled(): bool
     {
         return $this->sliderHelper->isEnabled();
     }
 
-    /**
-     * Get toHtml override to check if enabled
-     *
-     * @return string
-     */
     protected function _toHtml()
     {
         if (!$this->isModuleEnabled()) {
             return '';
         }
 
-        // Force-load items here (not getSize() — that's a separate COUNT
-        // query). The collection is cached on the block, so the template
-        // reuses the same loaded items without a second round-trip.
         try {
             $items = $this->getProductCollection()->getItems();
         } catch (\Throwable) {

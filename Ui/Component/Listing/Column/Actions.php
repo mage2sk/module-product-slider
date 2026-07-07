@@ -1,9 +1,4 @@
 <?php
-/**
- * Grid actions column for Slider listing
- *
- * @package Panth_ProductSlider
- */
 declare(strict_types=1);
 
 namespace Panth\ProductSlider\Ui\Component\Listing\Column;
@@ -16,30 +11,13 @@ use Magento\Ui\Component\Listing\Columns\Column;
 
 class Actions extends Column
 {
-    /**
-     * Url paths
-     */
     private const URL_PATH_EDIT = 'panth_productslider/slider/edit';
     private const URL_PATH_DELETE = 'panth_productslider/slider/delete';
 
-    /**
-     * @var UrlInterface
-     */
     private UrlInterface $urlBuilder;
 
-    /**
-     * @var Escaper
-     */
     private Escaper $escaper;
 
-    /**
-     * @param ContextInterface $context
-     * @param UiComponentFactory $uiComponentFactory
-     * @param UrlInterface $urlBuilder
-     * @param Escaper $escaper
-     * @param array $components
-     * @param array $data
-     */
     public function __construct(
         ContextInterface $context,
         UiComponentFactory $uiComponentFactory,
@@ -53,12 +31,6 @@ class Actions extends Column
         parent::__construct($context, $uiComponentFactory, $components, $data);
     }
 
-    /**
-     * Prepare Data Source
-     *
-     * @param array $dataSource
-     * @return array
-     */
     public function prepareDataSource(array $dataSource): array
     {
         if (isset($dataSource['data']['items'])) {

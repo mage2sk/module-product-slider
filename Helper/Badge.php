@@ -1,10 +1,4 @@
 <?php
-/**
- * Panth ProductSlider Badge Helper
- *
- * @package Panth_ProductSlider
- * @author Panth
- */
 declare(strict_types=1);
 
 namespace Panth\ProductSlider\Helper;
@@ -16,21 +10,10 @@ use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 
 class Badge extends AbstractHelper
 {
-    /**
-     * @var TimezoneInterface
-     */
     protected $timezone;
 
-    /**
-     * @var Data
-     */
     protected $dataHelper;
 
-    /**
-     * @param Context $context
-     * @param TimezoneInterface $timezone
-     * @param Data $dataHelper
-     */
     public function __construct(
         Context $context,
         TimezoneInterface $timezone,
@@ -41,14 +24,6 @@ class Badge extends AbstractHelper
         $this->dataHelper = $dataHelper;
     }
 
-    /**
-     * Get all badges for a product
-     *
-     * @param Product $product
-     * @param string $enabledTypes
-     * @param int $newDays
-     * @return array
-     */
     public function getBadges(Product $product, string $enabledTypes = 'sale,new', int $newDays = 30): array
     {
         $badges = [];
@@ -82,12 +57,6 @@ class Badge extends AbstractHelper
         return $badges;
     }
 
-    /**
-     * Get sale badge
-     *
-     * @param Product $product
-     * @return array|null
-     */
     public function getSaleBadge(Product $product): ?array
     {
         $specialPrice = $product->getSpecialPrice();
@@ -107,13 +76,6 @@ class Badge extends AbstractHelper
         ];
     }
 
-    /**
-     * Get new badge
-     *
-     * @param Product $product
-     * @param int $days
-     * @return array|null
-     */
     public function getNewBadge(Product $product, int $days = 30): ?array
     {
         $createdAt = $product->getCreatedAt();
@@ -137,12 +99,6 @@ class Badge extends AbstractHelper
         return null;
     }
 
-    /**
-     * Get stock badge
-     *
-     * @param Product $product
-     * @return array|null
-     */
     public function getStockBadge(Product $product): ?array
     {
         if (!$product->isSaleable()) {
@@ -171,12 +127,6 @@ class Badge extends AbstractHelper
         return null;
     }
 
-    /**
-     * Get featured badge
-     *
-     * @param Product $product
-     * @return array|null
-     */
     public function getFeaturedBadge(Product $product): ?array
     {
         $isFeatured = $product->getData('is_featured');
@@ -193,12 +143,6 @@ class Badge extends AbstractHelper
         return null;
     }
 
-    /**
-     * Get badge position classes
-     *
-     * @param string $position
-     * @return string
-     */
     public function getBadgePositionClass(string $position = 'top-left'): string
     {
         $positions = [

@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Panth\ProductSlider\Model\ResourceModel\Slider\Grid;
@@ -17,27 +16,10 @@ use Psr\Log\LoggerInterface;
 
 class Collection extends \Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult
 {
-    /**
-     * @var string
-     */
     protected $_idFieldName = 'slider_id';
 
-    /**
-     * @var AggregationInterface
-     */
     protected $aggregations;
 
-    /**
-     * @param EntityFactoryInterface $entityFactory
-     * @param LoggerInterface $logger
-     * @param FetchStrategyInterface $fetchStrategy
-     * @param ManagerInterface $eventManager
-     * @param string $mainTable
-     * @param string $resourceModel
-     * @param string|null $identifierName
-     * @param string|null $connectionName
-     * @throws \Magento\Framework\Exception\LocalizedException
-     */
     public function __construct(
         EntityFactoryInterface $entityFactory,
         LoggerInterface $logger,
@@ -60,11 +42,6 @@ class Collection extends \Magento\Framework\View\Element\UiComponent\DataProvide
         );
     }
 
-    /**
-     * Initialize select with filter mappings
-     *
-     * @return $this
-     */
     protected function _initSelect(): static
     {
         parent::_initSelect();
@@ -79,11 +56,6 @@ class Collection extends \Magento\Framework\View\Element\UiComponent\DataProvide
         return $this;
     }
 
-    /**
-     * Set items list - ensure each item has an ID set
-     *
-     * @return $this
-     */
     protected function _afterLoad(): static
     {
         parent::_afterLoad();
@@ -97,76 +69,37 @@ class Collection extends \Magento\Framework\View\Element\UiComponent\DataProvide
         return $this;
     }
 
-    /**
-     * Get aggregations
-     *
-     * @return AggregationInterface
-     */
     public function getAggregations(): AggregationInterface
     {
         return $this->aggregations;
     }
 
-    /**
-     * Set aggregations
-     *
-     * @param AggregationInterface $aggregations
-     * @return $this
-     */
     public function setAggregations($aggregations): static
     {
         $this->aggregations = $aggregations;
         return $this;
     }
 
-    /**
-     * Get search criteria
-     *
-     * @return SearchCriteriaInterface|null
-     */
     public function getSearchCriteria(): ?SearchCriteriaInterface
     {
         return null;
     }
 
-    /**
-     * Set search criteria
-     *
-     * @param SearchCriteriaInterface $searchCriteria
-     * @return $this
-     */
     public function setSearchCriteria(SearchCriteriaInterface $searchCriteria): static
     {
         return $this;
     }
 
-    /**
-     * Get total count
-     *
-     * @return int
-     */
     public function getTotalCount(): int
     {
         return $this->getSize();
     }
 
-    /**
-     * Set total count
-     *
-     * @param int $totalCount
-     * @return $this
-     */
     public function setTotalCount($totalCount): static
     {
         return $this;
     }
 
-    /**
-     * Set items
-     *
-     * @param array|null $items
-     * @return $this
-     */
     public function setItems(?array $items = null): static
     {
         return $this;

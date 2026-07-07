@@ -1,9 +1,4 @@
 <?php
-/**
- * Style Preset source model for system configuration
- *
- * @package Panth_ProductSlider
- */
 declare(strict_types=1);
 
 namespace Panth\ProductSlider\Model\Config\Source;
@@ -12,11 +7,6 @@ use Magento\Framework\Data\OptionSourceInterface;
 
 class StylePreset implements OptionSourceInterface
 {
-    /**
-     * Get options for style preset dropdown
-     *
-     * @return array
-     */
     public function toOptionArray(): array
     {
         return [
