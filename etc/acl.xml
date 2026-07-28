@@ -5,8 +5,8 @@
         <resources>
             <resource id="Magento_Backend::admin">
                 <resource id="Panth_Core::panth_extensions">
-                    <resource id="Panth_ProductSlider::slider_manage" title="Product Slider — Manage Sliders" sortOrder="120"/>
-                    <resource id="Panth_ProductSlider::config" title="Product Slider — Configuration" sortOrder="121"/>
+                    <resource id="Panth_ProductSlider::slider_manage" title="Product Slider - Manage Sliders" sortOrder="120"/>
+                    <resource id="Panth_ProductSlider::config" title="Product Slider - Configuration" sortOrder="121"/>
                 </resource>
             </resource>
         </resources>
