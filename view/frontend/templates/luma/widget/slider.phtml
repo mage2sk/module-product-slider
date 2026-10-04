@@ -1,0 +1,213 @@
+<?php
+/**
+ * Panth ProductSlider Widget - Luma Template
+ * Uses Swiper.js (from Panth_Core) for carousel
+ * Vanilla JS, no Alpine.js
+ *
+ * @var $block \Panth\ProductSlider\Block\Widget\ProductSlider
+ * @var $escaper \Magento\Framework\Escaper
+ */
+
+$config = $block->getSliderConfig();
+$products = $block->getProductCollection();
+$sliderId = $block->getSliderId();
+
+if (!$products || $products->getSize() == 0) {
+    return '';
+}
+
+$columnDesktop = (int)($config['columns_desktop'] ?? 4);
+$columnTablet = (int)($config['columns_tablet'] ?? 2);
+$columnMobile = (int)($config['columns_mobile'] ?? 1);
+$showPager = $config['show_pager'] ?? true;
+$showHeading = ($config['show_heading'] ?? true) && !empty($config['title']);
+$enableAutoplay = !empty($config['enable_autoplay']);
+$autoplayInterval = (int)($config['autoplay_interval'] ?? 5000);
+$headingTag = $config['heading_tag'] ?? 'h2';
+if (!in_array($headingTag, ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'], true)) {
+    $headingTag = 'h2';
+}
+$cardHeadingTag = $showHeading ? 'h' . min(6, (int)substr($headingTag, 1) + 1) : 'h3';
+$extraClass = !empty($config['custom_css_class']) ? ' ' . $config['custom_css_class'] : '';
+$title = $escaper->escapeHtml($config['title'] ?? __('Products'));
+$applyCardSettings = !empty($config['apply_card_settings']);
+$cardClasses = $block->getSliderCssClasses();
+$badgePositionClass = $block->getBadgePositionClass();
+$showAddToCart = $applyCardSettings && !empty($config['show_add_to_cart']) && empty($config['hide_details']);
+?>
+
+<style>
+.panth-product-slider { margin: 32px 0 48px; font-family: 'DM Sans', 'Inter', system-ui, sans-serif; position: relative; }
+.panth-product-slider .slider-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.panth-product-slider .slider-title { font-size: 24px; font-weight: 700; color: #171717; margin: 0; }
+.panth-product-slider .slider-nav { display: flex; gap: 8px; }
+.panth-product-slider .slider-nav button { width: 44px; height: 44px; border-radius: 50%; border: 1px solid #E5E7EB; background: #fff; color: #374151; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; padding: 0; }
+.panth-product-slider .slider-nav button:hover { border-color: var(--color-primary, #0D9488); color: var(--color-primary, #0D9488); background: #F0FDFA; }
+.panth-product-slider .slider-nav button.swiper-button-disabled { opacity: 0.3; cursor: default; }
+.panth-product-slider .slider-nav button svg { width: 18px; height: 18px; }
+.panth-product-slider .swiper { overflow: hidden; padding-bottom: 4px; }
+.panth-product-slider .swiper-slide { height: auto; }
+.panth-product-slider .product-card { border: 1px solid #E5E7EB; border-radius: 12px; overflow: hidden; background: #fff; height: 100%; display: flex; flex-direction: column; transition: box-shadow 0.2s; }
+.panth-product-slider .product-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+.panth-product-slider .product-card-image { position: relative; padding-top: 100%; overflow: hidden; background: #F9FAFB; }
+.panth-product-slider .product-card-image img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; }
+.panth-product-slider .product-card-image a { display: block; position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+.panth-product-slider .product-card-body { padding: 12px 16px 16px; flex: 1; display: flex; flex-direction: column; }
+.panth-product-slider .product-card-name { font-size: 14px; font-weight: 600; color: #171717; margin: 0 0 8px; line-height: 1.4; }
+.panth-product-slider .product-card-name a { color: inherit; text-decoration: none; }
+.panth-product-slider .product-card-name a:hover { color: var(--color-primary, #0D9488); }
+.panth-product-slider .product-card-price { font-size: 16px; font-weight: 700; color: #171717; margin-top: auto; }
+.panth-product-slider .product-card-price .old-price { font-size: 13px; color: var(--color-fg-secondary, #525252); text-decoration: line-through; margin-right: 6px; font-weight: 400; }
+.panth-product-slider .product-card-price .special-price { color: #DC2626; }
+.panth-product-slider .slider-pagination { margin-top: 12px; text-align: center; display: flex; justify-content: center; gap: 0; }
+.panth-product-slider .slider-pagination .swiper-pagination-bullet { box-sizing: content-box; width: 10px; height: 10px; margin: 0 !important; border: 7px solid transparent; background: #8A8A8A; background-clip: padding-box; opacity: 1; border-radius: 999px; display: inline-block; cursor: pointer; transition: all 0.2s; }
+.panth-product-slider .slider-pagination .swiper-pagination-bullet-active { background: var(--color-primary, #0D9488); background-clip: padding-box; width: 24px; }
+.panth-product-slider .product-card-actions { margin-top: 12px; }
+.panth-product-slider .product-card-actions .action { width: 100%; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; }
+@media (max-width: 767px) {
+    .panth-product-slider .slider-title { font-size: 18px; }
+}
+<?php if ($applyCardSettings): ?>
+<?= /* @noEscape */ $block->getCardStyleCss('#' . $escaper->escapeHtmlAttr($sliderId)) ?>
+<?= /* @noEscape */ $block->getCardStyleSheet('#' . $escaper->escapeHtmlAttr($sliderId)) ?>
+<?php endif; ?>
+</style>
+
+<?php $description = $config['description'] ?? ''; ?>
+<section class="panth-product-slider<?= $escaper->escapeHtmlAttr($extraClass) ?>" id="<?= $escaper->escapeHtmlAttr($sliderId) ?>" aria-roledescription="<?= $escaper->escapeHtmlAttr(__('carousel')) ?>" aria-label="<?= $escaper->escapeHtmlAttr($config['title'] ?: __('Product Slider')) ?>">
+    <div class="slider-header">
+        <div style="flex:1;min-width:0;">
+            <?php if ($showHeading): ?>
+                <<?= /* @noEscape */ $headingTag ?> class="slider-title"><?= /* @noEscape */ $title ?></<?= /* @noEscape */ $headingTag ?>>
+            <?php endif; ?>
+            <?php if ($description): ?>
+                <div style="font-size:14px;color:#6B7280;margin-top:4px;"><?= /** @noEscape */ $block->getDescriptionHtml() ?></div>
+            <?php endif; ?>
+        </div>
+        <div class="slider-nav" style="flex-shrink:0;">
+            <button type="button" id="<?= $escaper->escapeHtmlAttr($sliderId) ?>-prev" aria-label="<?= $escaper->escapeHtmlAttr(__('Previous')) ?>">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            </button>
+            <button type="button" id="<?= $escaper->escapeHtmlAttr($sliderId) ?>-next" aria-label="<?= $escaper->escapeHtmlAttr(__('Next')) ?>">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <div class="swiper" id="<?= $escaper->escapeHtmlAttr($sliderId) ?>-swiper">
+        <div class="swiper-wrapper">
+            <?php foreach ($products as $product): ?>
+                <?php
+                $productUrl = $product->getProductUrl();
+                $productName = (string)$product->getName();
+                $mediaUrl = $block->getProductImageUrl($product, 'category_page_grid', 300, 300);
+
+                $price = $product->getFinalPrice();
+                $regularPrice = $product->getPrice();
+                $hasSpecialPrice = $price < $regularPrice;
+                $badges = $block->getProductBadges($product);
+                ?>
+                <div class="swiper-slide">
+                    <div class="product-card<?= $applyCardSettings ? ' panth-ps-card ' . $escaper->escapeHtmlAttr($cardClasses) : '' ?>">
+                        <div class="product-card-image">
+                            <?php if ($badges): ?>
+                                <div class="panth-ps-badges <?= $escaper->escapeHtmlAttr($badgePositionClass) ?>">
+                                    <?php foreach ($badges as $badge): ?>
+                                        <span class="panth-ps-badge panth-ps-badge--<?= $escaper->escapeHtmlAttr($badge['type']) ?>"><?= $escaper->escapeHtml($badge['label']) ?></span>
+                                    <?php endforeach; ?>
+                                </div>
+                            <?php endif; ?>
+                            <a href="<?= $escaper->escapeUrl($productUrl) ?>" title="<?= $escaper->escapeHtmlAttr($productName) ?>">
+                                <img src="<?= $escaper->escapeUrl($mediaUrl) ?>"
+                                     alt="<?= $escaper->escapeHtmlAttr($productName) ?>"
+                                     loading="lazy"
+                                     width="300" height="300" />
+                            </a>
+                        </div>
+                        <div class="product-card-body">
+                            <<?= /* @noEscape */ $cardHeadingTag ?> class="product-card-name">
+                                <a href="<?= $escaper->escapeUrl($productUrl) ?>"><?= $escaper->escapeHtml($productName) ?></a>
+                            </<?= /* @noEscape */ $cardHeadingTag ?>>
+                            <div class="product-card-price">
+                                <?php if ($hasSpecialPrice): ?>
+                                    <span class="old-price"><?= $escaper->escapeHtml($block->formatPrice($regularPrice)) ?></span>
+                                    <span class="special-price"><?= $escaper->escapeHtml($block->formatPrice($price)) ?></span>
+                                <?php else: ?>
+                                    <?= $escaper->escapeHtml($block->formatPrice($price)) ?>
+                                <?php endif; ?>
+                            </div>
+                            <?php if ($showAddToCart && $product->isSaleable()): ?>
+                                <div class="product-card-actions">
+                                    <?php if ($product->getTypeInstance()->isPossibleBuyFromList($product) && !$product->getTypeInstance()->hasRequiredOptions($product)): ?>
+                                        <form method="post" action="<?= $escaper->escapeUrl($block->getUrl('checkout/cart/add', ['product' => (int)$product->getId()])) ?>">
+                                            <input type="hidden" name="product" value="<?= (int)$product->getId() ?>" />
+                                            <?= $block->getBlockHtml('formkey') ?>
+                                            <button type="submit" class="action tocart primary">
+                                                <span><?= $escaper->escapeHtml(__('Add to Cart')) ?></span>
+                                            </button>
+                                        </form>
+                                    <?php else: ?>
+                                        <a class="action primary" href="<?= $escaper->escapeUrl($productUrl) ?>">
+                                            <span><?= $escaper->escapeHtml(__('View Options')) ?></span>
+                                        </a>
+                                    <?php endif; ?>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+
+    <?php if ($showPager): ?>
+        <div class="slider-pagination" id="<?= $escaper->escapeHtmlAttr($sliderId) ?>-pagination"></div>
+    <?php endif; ?>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    'use strict';
+    var sliderId = '<?= $escaper->escapeJs($sliderId) ?>';
+    var swiperEl = document.getElementById(sliderId + '-swiper');
+    if (!swiperEl || typeof Swiper === 'undefined') return;
+
+    var reducedMotion = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    var swiper = new Swiper('#' + sliderId + '-swiper', {
+        slidesPerView: <?= (int)$columnMobile ?>,
+        spaceBetween: 16,
+        loop: false,
+        <?php if ($enableAutoplay): ?>
+        autoplay: reducedMotion ? false : {
+            delay: <?= (int)$autoplayInterval ?>,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true
+        },
+        <?php endif; ?>
+        navigation: {
+            nextEl: '#' + sliderId + '-next',
+            prevEl: '#' + sliderId + '-prev'
+        },
+        <?php if ($showPager): ?>
+        pagination: {
+            el: '#' + sliderId + '-pagination',
+            clickable: true
+        },
+        <?php endif; ?>
+        breakpoints: {
+            768: { slidesPerView: <?= (int)$columnTablet ?>, spaceBetween: 16 },
+            1024: { slidesPerView: <?= (int)$columnDesktop ?>, spaceBetween: 20 }
+        }
+    });
+    <?php if ($enableAutoplay): ?>
+    var sliderRoot = document.getElementById(sliderId) || swiperEl;
+    if (!reducedMotion && swiper.autoplay) {
+        sliderRoot.addEventListener('focusin', function() { swiper.autoplay.stop(); });
+        sliderRoot.addEventListener('focusout', function(e) {
+            if (e.relatedTarget && sliderRoot.contains(e.relatedTarget)) return;
+            swiper.autoplay.start();
+        });
+    }
+    <?php endif; ?>
+});
+</script>

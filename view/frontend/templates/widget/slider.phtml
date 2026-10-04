@@ -1,0 +1,190 @@
+<?php
+/**
+ * Panth ProductSlider Widget Template
+ *
+ * Uses Hyva's native snap-slider and ProductListItem renderer for consistent look.
+ * Identical to Hyva's product-slider.phtml with added autoplay and badge support.
+ *
+ * @var $block \Panth\ProductSlider\Block\Widget\ProductSlider
+ * @var $escaper \Magento\Framework\Escaper
+ */
+
+declare(strict_types=1);
+
+use Hyva\Theme\Model\ViewModelRegistry;
+use Hyva\Theme\ViewModel\LucideIcons;
+use Hyva\Theme\ViewModel\ProductListItem;
+use Magento\Catalog\Block\Product\ReviewRendererInterface as ProductReviewRenderer;
+use Magento\Framework\View\Element\Template;
+
+/** @var ViewModelRegistry $viewModels */
+$lucideIcons = $viewModels->require(LucideIcons::class);
+
+/** @var ProductListItem $productListItemViewModel */
+$productListItemViewModel = $viewModels->require(ProductListItem::class);
+
+$config = $block->getSliderConfig();
+
+// Collection is cached on the block, so this is the same instance _toHtml
+// already loaded - getItems() returns the cached array with no extra query.
+// The try/catch is defensive: if some downstream filter still produces
+// duplicate entity_id rows and the load throws, render empty instead of 500.
+try {
+    $products = $block->getProductCollection()->getItems();
+} catch (\Throwable) {
+    return '';
+}
+if (empty($products)) {
+    return '';
+}
+
+$sliderId = $block->getSliderId();
+$trackClasses = $block->getColumnTrackClasses();
+$extraClass = !empty($config['custom_css_class']) ? ' ' . $config['custom_css_class'] : '';
+
+$columnCount = (int) ($config['columns_desktop'] ?? 4);
+$showPager = $config['show_pager'] ?? true;
+$showHeading = ($config['show_heading'] ?? true) && !empty($config['title']);
+
+$itemRenderer = $block->getLayout()->getBlock('product_list_item')
+    ?: $block->getChildBlock('slider.item.template')
+    ?: $block->getLayout()->createBlock(Template::class);
+
+$applyCardSettings = !empty($config['apply_card_settings']);
+$cardClasses = $block->getSliderCssClasses();
+$badgePositionClass = $block->getBadgePositionClass();
+$previousHideDetails = $itemRenderer->getData('hide_details');
+$previousHideRating = $itemRenderer->getData('hide_rating_summary');
+$itemRenderer->setData('hide_details', !empty($config['hide_details']));
+$itemRenderer->setData('hide_rating_summary', !empty($config['hide_rating']));
+?>
+
+<section
+    id="<?= $escaper->escapeHtmlAttr($sliderId) ?>"
+    class="snap-slider product-slider my-8<?= $escaper->escapeHtmlAttr($extraClass) ?>"
+    aria-label="<?= $escaper->escapeHtmlAttr($config['title'] ?? __('Product Slider')) ?>"
+    x-data
+    <?php if (!empty($config['enable_autoplay'])): ?>
+    x-init="
+        const track = $el.querySelector('[data-track]');
+        const reduced = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+        let interval = null, hovered = false, focused = false;
+        const step = () => {
+            if (!track || document.hidden) return;
+            const max = track.scrollWidth - track.clientWidth;
+            if (max <= 2) return;
+            const left = track.scrollLeft >= max - 2 ? 0 : Math.min(track.scrollLeft + track.clientWidth, max);
+            track.scrollTo({ left: left, behavior: 'smooth' });
+        };
+        const startAutoplay = () => {
+            if (reduced || hovered || focused || interval) return;
+            interval = setInterval(step, <?= (int)($config['autoplay_interval'] ?? 5000) ?>);
+        };
+        const stopAutoplay = () => { clearInterval(interval); interval = null; };
+        startAutoplay();
+        $el.addEventListener('mouseenter', () => { hovered = true; stopAutoplay(); });
+        $el.addEventListener('mouseleave', () => { hovered = false; startAutoplay(); });
+        $el.addEventListener('focusin', () => { focused = true; stopAutoplay(); });
+        $el.addEventListener('focusout', (e) => { if (e.relatedTarget && $el.contains(e.relatedTarget)) return; focused = false; startAutoplay(); });
+    "
+    <?php endif; ?>
+    x-snap-slider.group-pager
+    x-defer="intersect"
+>
+    <a
+        href="#<?= $escaper->escapeHtmlAttr($sliderId) ?>-slider-end"
+        class="sr-only focus:not-sr-only focus:absolute focus:z-30 focus:bg-white"
+    ><?= $escaper->escapeHtml(__('Press to skip carousel')) ?></a>
+
+    <div class="flex gap-2 justify-between items-start">
+        <div class="flex-1 min-w-0">
+            <?php if ($showHeading): ?>
+                <?= /** @noEscape */ sprintf(
+                    '<%1$s class="text-2xl font-medium">%2$s</%1$s>',
+                    $escaper->escapeHtml($config['heading_tag'] ?? 'h3'),
+                    $escaper->escapeHtml($config['title'])
+                ) ?>
+            <?php endif; ?>
+            <?php if (!empty($config['description'])): ?>
+                <div class="text-sm text-gray-500 mt-1"><?= /** @noEscape */ $block->getDescriptionHtml() ?></div>
+            <?php endif; ?>
+        </div>
+        <div class="flex gap-2 shrink-0">
+            <button
+                class="btn btn-secondary p-2 invisible"
+                aria-label="<?= $escaper->escapeHtmlAttr(__('Previous Slide')) ?>"
+                data-prev
+                disabled
+            ><?= $lucideIcons->arrowLeftHtml('rtl:-rotate-180', 18, 18, ['aria-hidden' => 'true']); ?></button>
+            <button
+                class="btn btn-secondary p-2 invisible"
+                aria-label="<?= $escaper->escapeHtmlAttr(__('Next Slide')) ?>"
+                data-next
+                disabled
+            ><?= $lucideIcons->arrowRightHtml('rtl:-rotate-180', 18, 18, ['aria-hidden' => 'true']); ?></button>
+        </div>
+    </div>
+
+    <div class="<?= /* @noEscape */ $trackClasses ?> p-1 -m-1" data-track tabindex="0" aria-live="polite">
+        <?php foreach ($products as $product): ?>
+            <?php $badges = $block->getProductBadges($product); ?>
+            <div
+                id="<?= $escaper->escapeHtmlAttr($sliderId . '-' . $product->getId()) ?>"
+                class="flex flex-col<?= $applyCardSettings ? ' relative panth-ps-card ' . $escaper->escapeHtmlAttr($cardClasses) : '' ?>"
+                role="tabpanel"
+            >
+                <?php if ($badges): ?>
+                    <div class="panth-ps-badges <?= $escaper->escapeHtmlAttr($badgePositionClass) ?>">
+                        <?php foreach ($badges as $badge): ?>
+                            <span class="panth-ps-badge panth-ps-badge--<?= $escaper->escapeHtmlAttr($badge['type']) ?>"><?= $escaper->escapeHtml($badge['label']) ?></span>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
+                <?= /** @noEscape */ $productListItemViewModel->getItemHtmlWithRenderer(
+                    $itemRenderer,
+                    $product,
+                    $block,
+                    'grid',
+                    ProductReviewRenderer::SHORT_VIEW,
+                    'category_page_grid',
+                    false
+                ) ?>
+            </div>
+        <?php endforeach; ?>
+        <?php
+        $itemRenderer->setData('hide_details', $previousHideDetails);
+        $itemRenderer->setData('hide_rating_summary', $previousHideRating);
+        ?>
+    </div>
+
+    <?php if ($showPager): ?>
+        <div class="snap-pager" data-pager>
+            <?php foreach ($products as $product): ?>
+                <a
+                    href="#<?= $escaper->escapeHtmlAttr($sliderId . '-' . $product->getId()) ?>"
+                    class="snap-marker"
+                    role="tab"
+                    x-cloak
+                >
+                    <span class="sr-only">
+                        <?= $escaper->escapeHtml(__('View more about %1', $product->getName())) ?>
+                    </span>
+                </a>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+
+    <span id="<?= $escaper->escapeHtmlAttr($sliderId) ?>-slider-end" tabindex="-1"></span>
+</section>
+<style>
+#<?= $escaper->escapeHtmlAttr($sliderId) ?> [data-prev], #<?= $escaper->escapeHtmlAttr($sliderId) ?> [data-next] { min-width: 44px; min-height: 44px; justify-content: center; }
+#<?= $escaper->escapeHtmlAttr($sliderId) ?> .price-box { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; }
+#<?= $escaper->escapeHtmlAttr($sliderId) ?> .old-price .price { text-decoration: line-through; color: var(--color-fg-secondary, #525252); font-size: 0.875rem; }
+<?php if (empty($config['show_add_to_cart'])): ?>
+#<?= $escaper->escapeHtmlAttr($sliderId) ?> [data-addto="cart"] { display: none !important; }
+<?php endif; ?>
+<?php if ($applyCardSettings): ?>
+<?= /* @noEscape */ $block->getCardStyleCss('#' . $escaper->escapeHtmlAttr($sliderId)) ?>
+<?= /* @noEscape */ $block->getCardStyleSheet('#' . $escaper->escapeHtmlAttr($sliderId)) ?>
+<?php endif; ?>
+</style>

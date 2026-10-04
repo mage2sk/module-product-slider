@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Panth ProductSlider database schema
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="panth_product_slider" resource="default" engine="innodb" comment="Panth Product Slider Table">
+        <!-- Primary Key -->
+        <column xsi:type="int" name="slider_id" unsigned="true" nullable="false" identity="true"
+                comment="Slider ID"/>
+
+        <!-- Identification -->
+        <column xsi:type="varchar" name="identifier" length="255" nullable="false"
+                comment="Unique Identifier"/>
+        <column xsi:type="varchar" name="title" length="255" nullable="false"
+                comment="Slider Title"/>
+        <column xsi:type="smallint" name="is_active" nullable="false" default="1"
+                comment="Is Active"/>
+        <column xsi:type="varchar" name="store_ids" length="255" nullable="false" default="0"
+                comment="Store IDs"/>
+
+        <!-- Heading -->
+        <column xsi:type="varchar" name="heading_tag" length="10" nullable="false" default="h2"
+                comment="Heading HTML Tag"/>
+        <column xsi:type="smallint" name="show_heading" nullable="false" default="1"
+                comment="Show Heading"/>
+        <column xsi:type="text" name="description" nullable="true"
+                comment="Description HTML below heading"/>
+
+        <!-- Product Selection -->
+        <column xsi:type="text" name="category_ids" nullable="true"
+                comment="Category IDs"/>
+        <column xsi:type="text" name="product_ids" nullable="true"
+                comment="Product IDs"/>
+        <column xsi:type="text" name="product_skus" nullable="true"
+                comment="Product SKUs"/>
+
+        <!-- Product Filters -->
+        <column xsi:type="smallint" name="sale_products_only" nullable="false" default="0"
+                comment="Show Sale Products Only"/>
+        <column xsi:type="int" name="new_products_days" nullable="true"
+                comment="New Products Days Threshold"/>
+        <column xsi:type="decimal" name="price_from" scale="4" precision="12" nullable="true"
+                comment="Price From"/>
+        <column xsi:type="decimal" name="price_to" scale="4" precision="12" nullable="true"
+                comment="Price To"/>
+        <column xsi:type="smallint" name="exclude_out_of_stock" nullable="false" default="0"
+                comment="Exclude Out of Stock Products"/>
+
+        <!-- Sorting & Pagination -->
+        <column xsi:type="varchar" name="sort_by" length="30" nullable="false" default="position"
+                comment="Sort By"/>
+        <column xsi:type="varchar" name="sort_direction" length="4" nullable="false" default="ASC"
+                comment="Sort Direction"/>
+        <column xsi:type="int" name="page_size" nullable="false" default="8"
+                comment="Page Size"/>
+
+        <!-- Layout Columns -->
+        <column xsi:type="smallint" name="columns_mobile" nullable="false" default="1"
+                comment="Columns on Mobile"/>
+        <column xsi:type="smallint" name="columns_tablet" nullable="false" default="2"
+                comment="Columns on Tablet"/>
+        <column xsi:type="smallint" name="columns_desktop" nullable="false" default="4"
+                comment="Columns on Desktop"/>
+
+        <!-- Slider Behavior -->
+        <column xsi:type="smallint" name="show_pager" nullable="false" default="1"
+                comment="Show Pager"/>
+        <column xsi:type="smallint" name="enable_autoplay" nullable="false" default="0"
+                comment="Enable Autoplay"/>
+        <column xsi:type="int" name="autoplay_interval" nullable="false" default="3000"
+                comment="Autoplay Interval in ms"/>
+
+        <!-- Display Options -->
+        <column xsi:type="smallint" name="show_add_to_cart" nullable="false" default="1"
+                comment="Show Add to Cart Button"/>
+        <column xsi:type="smallint" name="hide_details" nullable="false" default="0"
+                comment="Hide Product Details"/>
+        <column xsi:type="smallint" name="hide_rating" nullable="false" default="0"
+                comment="Hide Product Rating"/>
+
+        <!-- Styling -->
+        <column xsi:type="varchar" name="style_preset" length="20" nullable="false" default="default"
+                comment="Style Preset"/>
+        <column xsi:type="varchar" name="card_shadow" length="10" nullable="false" default="md"
+                comment="Card Shadow Size"/>
+        <column xsi:type="varchar" name="card_hover_effect" length="10" nullable="false" default="lift"
+                comment="Card Hover Effect"/>
+        <column xsi:type="varchar" name="custom_css_class" length="255" nullable="true"
+                comment="Custom CSS Class"/>
+
+        <!-- Ordering -->
+        <column xsi:type="int" name="sort_order" nullable="false" default="0"
+                comment="Sort Order"/>
+
+        <!-- Timestamps -->
+        <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" nullable="false" default="CURRENT_TIMESTAMP"
+                on_update="true" comment="Updated At"/>
+
+        <!-- Constraints -->
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="slider_id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="PANTH_PRODUCT_SLIDER_IDENTIFIER">
+            <column name="identifier"/>
+        </constraint>
+
+        <!-- Indexes -->
+        <index referenceId="PANTH_PRODUCT_SLIDER_IS_ACTIVE" indexType="btree">
+            <column name="is_active"/>
+        </index>
+    </table>
+</schema>
