@@ -233,7 +233,7 @@ The table `panth_product_slider` and the `product_slider/*` rows in `core_config
 
 ## License
 
-Commercial software license. See [LICENSE.txt](LICENSE.txt) in this repository.
+Free and open source under the MIT License. See [LICENSE.txt](LICENSE.txt).
 
 ## Changelog
 
